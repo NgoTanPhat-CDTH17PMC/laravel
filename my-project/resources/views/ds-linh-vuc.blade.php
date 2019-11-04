@@ -75,9 +75,9 @@
 
 				 <form action="{{ route('linh-vuc/xu-li-them-moi') }}" method="POST">
                 	@csrf
-					<button type="button" class="btn btn-primary waves-effect waves-light"data-toggle="modalmyModalThemMoi" data-target="#myModalThemMoi" id="open" style="margin-top:20px; margin-bottom:20px">Thêm Mới</button>
-					<div class="modal" tabindex="-1" role="dialog" id="myModalThemMoi" >
-				        <div class="modal-dialog" role="document">
+					<button type="button" class="btn btn-primary waves-effect waves-light"data-toggle="modal" data-target="#myModalThemMoi" id="open" style="margin-top:20px; margin-bottom:20px">Thêm Mới</button>
+					<div class="modal fade" tabindex="-1" role="dialog" id="myModalThemMoi" >
+				        <div class="modal-dialog modal-dialog-centered" role="document">
 				            <div class="modal-content">
 				                <div class="alert alert-danger" style="display:none"></div>
 				                <div class="modal-header">
@@ -123,8 +123,8 @@
 								    @csrf
 								  	<button type="button" class="btn btn-info btn-rounded waves-effect waves-light" 
 									data-toggle="modal" data-target="#myModalCapNhat{{$table->id}}" id="open">Cập nhật</button>
-								    <div class="modal" tabindex="-1" role="dialog" id="myModalCapNhat{{$table->id}}">
-								        <div class="modal-dialog" role="document">
+								    <div class="modal fade" tabindex="-1" role="dialog" id="myModalCapNhat{{$table->id}}">
+								        <div class="modal-dialog modal-dialog-centered" role="document">
 								            <div class="modal-content">
 								                <div class="alert alert-danger" style="display:none"></div>
 								                <div class="modal-header">
@@ -162,8 +162,8 @@
 									@method('DELETE')
 									@csrf
 									<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#myModalXoa" id="open">Xóa</button>
-									<div class="modal" tabindex="-1" role="dialog" id="myModalXoa">
-								        <div class="modal-dialog" role="document">
+									<div class="modal fade" tabindex="-1" role="dialog" id="myModalXoa">
+								        <div class="modal-dialog modal-dialog-centered" role="document">
 								            <div class="modal-content">
 								                <div class="alert alert-danger" style="display:none"></div>
 								                <div class="modal-header">
