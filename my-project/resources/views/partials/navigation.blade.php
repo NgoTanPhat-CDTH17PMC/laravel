@@ -244,6 +244,22 @@
 							</li>
 
 							<li class="has-submenu">
+								<a href="{{ route('goi-credit/ds-goi-credit')}}"> <i class=" la la-diamond"></i>Gói Credit
+									<div class="arrow-down"></div></a>
+									<ul class="submenu">
+										<li>
+											<a href="{{ route('goi-credit/them-moi')}}">Thêm Mới</a>
+										</li>
+										<li>
+											<a href="#">Cập Nhật</a>
+										</li>
+										<li>
+											<a href="#">Xóa</a>
+										</li>
+									</ul>
+							</li>
+
+							<li class="has-submenu">
 								<a href="#">
 									<i class="la la-diamond"></i>Cấu Hình <div class="arrow-down"></div></a>
 								<ul class="submenu">
