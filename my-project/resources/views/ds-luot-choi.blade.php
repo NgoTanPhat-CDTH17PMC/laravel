@@ -40,32 +40,10 @@
 	use App\Http\Controllers\LuotChoiController;
 	echo LuotChoiController::cleanup();  // Reset auto increment
 
-
-	function Alert($msg) {
-    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
-}
 ?>
 
 @section('main-content')
 
-<!-- Thanh thong bao -->
-@if (session('deleted'))
-	<?php
-		Alert("Xóa thành công!");		
-	?>
-@endif
-
-@if (session('updated'))
- 	<?php
-		Alert("Cập nhật thành công!");		
-	?>
-@endif
-
-@if (session('added'))
- 	<?php
-		Alert("Thêm mới thành công!");		
-	?>
-@endif
 
 <div class="row">
 	<div class="col-md-12">

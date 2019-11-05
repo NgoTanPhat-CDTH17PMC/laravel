@@ -36,37 +36,13 @@
 	});
 </script>
 @endsection
+
 <?php 
 	use App\Http\Controllers\CauHoiConTroller;
 	echo CauHoiController::cleanup();  // Reset auto increment
-
-
-	function Alert($msg) {
-    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
-}
 ?>
 
-
 @section('main-content')
-
-<!-- Thanh thong bao -->
-@if (session('deleted'))
-	<?php
-		Alert("Xóa thành công!");		
-	?>
-@endif
-
-@if (session('updated'))
- 	<?php
-		Alert("Cập nhật thành công!");		
-	?>
-@endif
-
-@if (session('added'))
- 	<?php
-		Alert("Thêm mới thành công!");		
-	?>
-@endif
 
 <div class="row">
 	<div class="col-md-12">
@@ -76,26 +52,12 @@
 				<a  href="{{ route('cau-hoi/them-moi') }}">
 					<button type="button" class="btn btn-primary waves-effect waves-light" style="margin-top:20px; margin-bottom:20px">Thêm Mới</button>
 				</a>
-				<a  href="cap-nhat-n">
-					<button type="button" class="btn btn-primary waves-effect waves-light" style="margin-left:20px; margin-right:20px">Cập nhật</button>
-				</a>
-				<a  href="#">
-					<button type="button" class="btn btn-primary waves-effect waves-light">Xóa</button>
-				</a>
 				<table id="cau-hoi-datatable" class="table dt-responsive nowrap">
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>Lĩnh Vực ID</th>
 							<th>Nội dung</th>
-							<th>Thao tác</th>
-							
-							<!-- 
-							<th>Phương Án A</th>
-							<th>Phương Án B</th>
-							<th>Phương Án C</th>
-							<th>Phương Án D</th>
-							<th>Đáp Án</th> -->
 						</tr>
 					</thead>
 					<tbody>
@@ -108,7 +70,7 @@
 								<p>{{ $table->linhVuc->ten }} </p>
 							</td>
 							<td>
-								<p style="display:block; width:250px;">{{ $table->noi_dung }} </p>
+								<p style="display:block; width:240px;">{{ $table->noi_dung }} </p>
 								<p>Phương án A: {{ $table->phuong_an_a }}</p>
 								<p>Phương án B: {{ $table->phuong_an_b }}</p>
 								<p>Phương án C: {{ $table->phuong_an_c }}</p>
