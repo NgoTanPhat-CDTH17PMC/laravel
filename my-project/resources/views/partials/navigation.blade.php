@@ -211,6 +211,18 @@
 							</li>
 
 							<li class="has-submenu">
+								<a href="{{route('nguoi-choi/ds-nguoi-choi')}}"> <i class="la la-briefcase"></i>Người Chơi <div class="arrow-down"></div></a>
+								<ul class="submenu">
+									<li class="has-submenu">
+										<a href="{{ route('luot-choi/ds-luot-choi')}}"> <i class="la la-file-text-o"></i>Lượt Chơi</a>
+									</li>
+									<li class="has-submenu">
+										<a href="{{ route('lich-su-mua-credit/ds-lich-su-mua-credit')}}"><i class="fe-bookmark mr-1"></i>Lịch sử mua credit</a>
+									</li>
+								</ul>
+							</li>
+
+							<li class="has-submenu">
 								<a href="{{ route('linh-vuc/ds-linh-vuc')}}">
 									<i class="la la-cube"></i>Lĩnh Vực <div class="arrow-down"></div></a>
 								<ul class="submenu">
@@ -308,17 +320,6 @@
 								</ul>
 							</li>
 
-							<li class="has-submenu">
-								<a href="{{route('nguoi-choi/ds-nguoi-choi')}}"> <i class="la la-briefcase"></i>Người Chơi <div class="arrow-down"></div></a>
-								<ul class="submenu">
-									<li class="has-submenu">
-										<a href="{{ route('luot-choi/ds-luot-choi')}}"> <i class="la la-file-text-o"></i>Lượt Chơi</a>
-									</li>
-									<li class="has-submenu">
-										<a href="{{ route('lich-su-mua-credit/ds-lich-su-mua-credit')}}"><i class="fe-bookmark mr-1"></i>Lịch sử mua credit</a>
-									</li>
-								</ul>
-							</li>
 						</ul>
 						<!-- End navigation menu -->
 						<div class="clearfix"></div>
