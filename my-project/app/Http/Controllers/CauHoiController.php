@@ -68,7 +68,7 @@ class CauHoiController extends Controller
             {
                 if ($table->noi_dung == $input)
                 {
-                    return redirect()->route('cau-hoi/ds-cau-hoi')->with('error',' ');
+                    return redirect()->route('cau-hoi/ds-cau-hoi')->with('error','Câu hỏi này đã tồn tại!');
                 }
             }
 
