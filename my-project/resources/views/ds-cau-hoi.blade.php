@@ -58,6 +58,7 @@
 							<th>ID</th>
 							<th>Lĩnh Vực ID</th>
 							<th>Nội dung</th>
+							<th>Thao tác</th>
 						</tr>
 					</thead>
 					<tbody>

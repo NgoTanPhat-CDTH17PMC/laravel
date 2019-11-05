@@ -320,6 +320,22 @@
 								</ul>
 							</li>
 
+							<li class="has-submenu">
+								<a href="{{ route('goi-credit/ds-goi-credit')}}"> <i class=" la la-trash"></i>Thùng Rác
+									<div class="arrow-down"></div></a>
+									<ul class="submenu">
+										<li>
+											<a href="{{ route('linh-vuc/da-xoa')}}">Lĩnh Vực</a>
+										</li>
+										<li>
+											<a href="#">Cập Nhật</a>
+										</li>
+										<li>
+											<a href="#">Xóa</a>
+										</li>
+									</ul>
+							</li>
+
 						</ul>
 						<!-- End navigation menu -->
 						<div class="clearfix"></div>

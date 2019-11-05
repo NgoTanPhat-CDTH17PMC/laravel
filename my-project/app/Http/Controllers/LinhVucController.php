@@ -28,8 +28,18 @@ class LinhVucController extends Controller
         if(session('error')){
              Alert::error('Thất Bại', 'Có gì đó không đúng!');
         }
-        $linhVuc = DB::table('linh_vuc')->get();
+        $linhVuc = LinhVuc::all();
         return view('ds-linh-vuc', compact('linhVuc'));
+    }
+
+    public function deleted()
+    {
+        if(session('success_message')){
+            Alert::success('Hoàn Tất',session('success_message'));
+        }
+
+        $linhVuc = LinhVuc::onlyTrashed()->get();
+        return view('bin.linh-vuc-deleted', compact('linhVuc'));
     }
 
     /**
@@ -62,6 +72,13 @@ class LinhVucController extends Controller
             return redirect()->route('linh-vuc/ds-linh-vuc')->withSuccessMessage('Thêm mới thành công!');
         }
         
+    }
+
+    public function restore($id)
+    {
+        $trip = LinhVuc::withTrashed()->where('id', $id)->restore();
+
+        return redirect()->action('LinhVucController@deleted')->withSuccessMessage('Khôi phục thành công!');
     }
 
     /**

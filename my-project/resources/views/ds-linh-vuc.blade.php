@@ -172,9 +172,3 @@
 </div>
 			<!-- end row-->
 @endsection
-
-<!--<form method="POST" action="xoa/{{$table->id}}" style="float:left" >
-	@method('DELETE')
-	@csrf
-	<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" >Xóa</button>
-</form>		-->

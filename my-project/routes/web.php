@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function(){
 
 			Route::post('xu-li-them-moi', 'LinhVucController@store')->name('xu-li-them-moi');
 			Route::DELETE('xoa/{id}', 'LinhVucController@destroy')->name('xoa');
+
+			Route::get('da-xoa', 'LinhVucController@deleted')->name('da-xoa');
+			Route::get('khoi-phuc/{id}', 'LinhVucController@restore')->name('khoi-phuc');
 		});
 	});
 
