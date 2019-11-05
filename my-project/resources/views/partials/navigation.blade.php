@@ -273,7 +273,7 @@
 
 							<li class="has-submenu">
 								<a href="#">
-									<i class="la la-diamond"></i>Cấu Hình <div class="arrow-down"></div></a>
+									<i class="la la-cog"></i>Cấu Hình <div class="arrow-down"></div></a>
 								<ul class="submenu">
 									<li class="has-submenu">
 										<a href="{{ route('cau-hinh-app/ds-cau-hinh-app')}}"><i class="fe-bookmark mr-1"></i> Cấu Hình App <div class="arrow-down"></div></a>
@@ -328,10 +328,16 @@
 											<a href="{{ route('linh-vuc/da-xoa')}}">Lĩnh Vực</a>
 										</li>
 										<li>
-											<a href="#">Cập Nhật</a>
+											<a href="#">Câu Hỏi</a>
 										</li>
 										<li>
-											<a href="#">Xóa</a>
+											<a href="#">Gói Credit</a>
+										</li>
+										<li>
+											<a href="#">Người Chơi</a>
+										</li>
+										<li>
+											<a href="#">Quản Trị Viên</a>
 										</li>
 									</ul>
 							</li>

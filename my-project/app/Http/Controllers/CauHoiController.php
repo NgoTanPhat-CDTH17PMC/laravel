@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CauHoi;
 use Illuminate\Support\Facades\DB;
 use App\LinhVuc;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CauHoiController extends Controller
 {
@@ -21,7 +22,14 @@ class CauHoiController extends Controller
      */
     public function index()
     {
-        $linhVuc=LinhVuc::all();
+        if(session('success_message')){
+            Alert::success('Hoàn Tất', session('success_message'));
+        }
+        if(session('error')){
+             Alert::error('Thất Bại', session('error'));
+        }
+
+        $linhVuc = LinhVuc::all();
         $cauHoi = CauHoi::all();
         $pageName = 'Danh Sách Câu Hỏi'; // Khai báo tên trang
         return view('ds-cau-hoi', compact('pageName','cauHoi','linhVuc'));
@@ -47,16 +55,34 @@ class CauHoiController extends Controller
      */
     public function store(Request $request)
     {
-        $cauHoi = new CauHoi;
-        $cauHoi->noi_dung= $request->noi_dung;
-        $cauHoi->linh_vuc_id= $request->linh_vuc_id;
-        $cauHoi->phuong_an_a= $request->phuong_an_a;
-        $cauHoi->phuong_an_b= $request->phuong_an_b;
-        $cauHoi->phuong_an_c= $request->phuong_an_c;
-        $cauHoi->phuong_an_d= $request->phuong_an_d;
-        $cauHoi->dap_an= $request->dap_an;
-        $cauHoi->save();
-        return redirect()->action('CauHoiController@index')->with('added',' ');
+        $input = $request->noi_dung;
+
+        if ($input == '' || $request->linh_vuc_id == '' || $request->phuong_an_a == '' || $request->phuong_an_b == '' || $request->phuong_an_c == '' || $request->phuong_an_d == '' || $request->dap_an == '') 
+        {
+            return redirect()->route('cau-hoi/ds-cau-hoi')->with('error','Thêm mới thất bại. Các trường không được để trống!');
+        }
+        else 
+        {
+            $chkCauHoi = CauHoi::all();
+            foreach ($chkCauHoi as $table)
+            {
+                if ($table->noi_dung == $input)
+                {
+                    return redirect()->route('cau-hoi/ds-cau-hoi')->with('error',' ');
+                }
+            }
+
+            $cauHoi = new CauHoi;
+            $cauHoi->noi_dung = $request->noi_dung;
+            $cauHoi->linh_vuc_id = $request->linh_vuc_id;
+            $cauHoi->phuong_an_a = $request->phuong_an_a;
+            $cauHoi->phuong_an_b = $request->phuong_an_b;
+            $cauHoi->phuong_an_c = $request->phuong_an_c;
+            $cauHoi->phuong_an_d = $request->phuong_an_d;
+            $cauHoi->dap_an = $request->dap_an;
+            $cauHoi->save();
+            return redirect()->route('cau-hoi/ds-cau-hoi')->withSuccessMessage('Thêm mới thành công!');
+        }
     }
 
     /**
@@ -93,18 +119,27 @@ class CauHoiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cauHoi = CauHoi::find($id);
-        $cauHoi->noi_dung= $request->noi_dung;
-        $cauHoi->linh_vuc_id= $request->linh_vuc_id;
-        $cauHoi->phuong_an_a= $request->phuong_an_a;
-        $cauHoi->phuong_an_b= $request->phuong_an_b;
-        $cauHoi->phuong_an_c= $request->phuong_an_c;
-        $cauHoi->phuong_an_d= $request->phuong_an_d;
-        $cauHoi->dap_an= $request->dap_an;
+        $input = $request->noi_dung;
 
-        $cauHoi->save();
+        if ($input == '' || $request->linh_vuc_id == '' || $request->phuong_an_a == '' || $request->phuong_an_b == '' || $request->phuong_an_c == '' || $request->phuong_an_d == '' || $request->dap_an == '') 
+        {
+            return redirect()->route('cau-hoi/ds-cau-hoi')->with('error','Cập nhật thất bại. Các trường không được để trống!');
+        }
+        else 
+        {
+            $cauHoi = CauHoi::find($id);
+            $cauHoi->noi_dung = $request->noi_dung;
+            $cauHoi->linh_vuc_id = $request->linh_vuc_id;
+            $cauHoi->phuong_an_a = $request->phuong_an_a;
+            $cauHoi->phuong_an_b = $request->phuong_an_b;
+            $cauHoi->phuong_an_c = $request->phuong_an_c;
+            $cauHoi->phuong_an_d = $request->phuong_an_d;
+            $cauHoi->dap_an= $request->dap_an;
+
+            $cauHoi->save();
+        }
         
-        return redirect()->action('CauHoiController@index')->with('updated',' ');
+        return redirect()->action('CauHoiController@index')->withSuccessMessage('Cập nhật thành công!');
     }
 
     /**
@@ -118,6 +153,6 @@ class CauHoiController extends Controller
         $cauHoi = CauHoi::find($id);
 
         $cauHoi->delete();
-        return redirect()->action('CauHoiController@index')->with('deleted',' ');
+        return redirect()->action('CauHoiController@index')->withSuccessMessage('Xoá thành công!');
     }
 }

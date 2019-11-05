@@ -50,12 +50,9 @@
 				<a  href="{{ route('nguoi-choi/them-moi') }}">
 					<button type="button" class="btn btn-primary waves-effect waves-light" style="margin-top:20px; margin-bottom:20px">Thêm Mới</button>
 				</a>
-				<a  href="cap-nhat-n">
-					<button type="button" class="btn btn-primary waves-effect waves-light" style="margin-left:20px; margin-right:20px">Cập nhật</button>
-				</a>
-				<a  href="#">
-					<button type="button" class="btn btn-primary waves-effect waves-light">Xóa</button>
-				</a>
+
+				<br>
+
 				<table id="nguoi-choi-datatable" class="table dt-responsive nowrap">
 					<thead>
 						<tr>
@@ -66,7 +63,7 @@
 							<th>Hình đại diện</th>
 							<th>Điểm cao nhất</th>
 							<th>Credit</th>
-							<th></th>
+							<th>Thao tác</th>
 						</tr>
 					</thead>
 					

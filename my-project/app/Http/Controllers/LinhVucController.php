@@ -23,10 +23,10 @@ class LinhVucController extends Controller
     {
 
         if(session('success_message')){
-            Alert::success('Hoàn Tất',session('success_message'));
+            Alert::success('Hoàn Tất', session('success_message'));
         }
         if(session('error')){
-             Alert::error('Thất Bại', 'Có gì đó không đúng!');
+             Alert::error('Thất Bại', session('error'));
         }
         $linhVuc = LinhVuc::all();
         return view('ds-linh-vuc', compact('linhVuc'));
@@ -35,7 +35,7 @@ class LinhVucController extends Controller
     public function deleted()
     {
         if(session('success_message')){
-            Alert::success('Hoàn Tất',session('success_message'));
+            Alert::success('Hoàn Tất', session('success_message'));
         }
 
         $linhVuc = LinhVuc::onlyTrashed()->get();
@@ -63,15 +63,24 @@ class LinhVucController extends Controller
 
         if ($input == '') 
         {
-            return redirect()->route('linh-vuc/ds-linh-vuc')->with('error',' ');
-        }else 
+            return redirect()->route('linh-vuc/ds-linh-vuc')->with('error','Tên lĩnh vực không được để trống!');
+        }
+        else 
         {
+            $chkLinhVuc = LinhVuc::all();
+            foreach ($chkLinhVuc as $table)
+            {
+                if ($table->ten == $input)
+                {
+                    return redirect()->route('linh-vuc/ds-linh-vuc')->with('error','Tên lĩnh vực đã tồn tại!');
+                }
+            }
+
             $linhVuc = new LinhVuc;
             $linhVuc->ten = $request->ten_linh_vuc;
             $linhVuc->save();
             return redirect()->route('linh-vuc/ds-linh-vuc')->withSuccessMessage('Thêm mới thành công!');
-        }
-        
+        } 
     }
 
     public function restore($id)
@@ -111,9 +120,10 @@ class LinhVucController extends Controller
     public function update(Request $request, $id)
     {
         $input = $request->input('ten_linh_vuc_moi');
+
         if ($input == '') 
         {
-            return redirect()->route('linh-vuc/ds-linh-vuc')->with('error',' ');
+            return redirect()->route('linh-vuc/ds-linh-vuc')->with('error', 'Tên lĩnh vực mới không được để trống!');
         }
         else 
         {
@@ -142,7 +152,7 @@ class LinhVucController extends Controller
         }
         else
         {
-            return redirect()->action('LinhVucController@index')->with('error',' ');
+            return redirect()->action('LinhVucController@index')->with('error','Xoá thất bại!');
         }
     }
 }
