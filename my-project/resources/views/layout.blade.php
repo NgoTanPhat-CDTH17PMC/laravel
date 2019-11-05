@@ -18,7 +18,9 @@
 		<link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
-
+		<script src="{{ asset('assets/js/sweet-alert.min.js') }}"></script>
+		<script src="{{ asset('assets/js/sweet-alert.js') }}"></script>
+		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/sweet-alert.css') }}">
 	</head>
 
 	<body>
@@ -26,7 +28,7 @@
 			$ho_ten = Auth::user()->ho_ten;
 		@endphp
 
-
+		@include('sweetalert::alert')
 		@include('partials.navigation')
 
 		<!-- ============================================================== -->
@@ -164,6 +166,7 @@
 		<!-- App js-->
 		<script src="{{ asset('assets/js/app.min.js') }}"></script>
 
+		
         <!-- third party js -->
         @yield ('js')
         <!-- third party js ends -->

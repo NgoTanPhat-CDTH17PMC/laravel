@@ -7,6 +7,8 @@ use App\QuanTriVien;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class QuanTriVienController extends Controller
 {
@@ -22,6 +24,12 @@ class QuanTriVienController extends Controller
 
     public function dangNhap()
     {
+        if(session('success_message')){
+            Alert::success('Thành công',session('success_message'));
+        }
+        if(session('error')){
+             Alert::error('Thất Bại','Có gì đó không đúng!');
+        }
         return view('dang-nhap');
     }
 
@@ -32,9 +40,12 @@ class QuanTriVienController extends Controller
 
         if (Auth::attempt(['ten_dang_nhap' => $ten_dang_nhap, 'password' => $mat_khau]))
         {
-            return redirect()->route('trang-chu');
+            return redirect()->route('trang-chu')->withSuccessMessage('Đăng nhập thành công!');
         }
-        return "Đăng nhập thất bại!";
+        else{
+            return redirect()->route('dang-nhap')->with('error',' ');
+        }
+        //return "Đăng nhập thất bại!";
 
         /*$qtv = QuanTriVien::where('ten_dang_nhap', $ten_dang_nhap)->first();
         if ($qtv == null)
@@ -55,7 +66,7 @@ class QuanTriVienController extends Controller
     public function dangXuat()
     {
         Auth::logout();
-        return redirect()->route('dang-nhap');
+        return redirect()->route('dang-nhap')->withSuccessMessage('Đăng xuất thành công!');
     }
 
     /**

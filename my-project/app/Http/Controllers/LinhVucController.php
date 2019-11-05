@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\LinhVuc;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LinhVucController extends Controller
 {
@@ -20,6 +21,13 @@ class LinhVucController extends Controller
      */
     public function index()
     {
+
+        if(session('success_message')){
+            Alert::success('Hoàn Tất',session('success_message'));
+        }
+        if(session('error')){
+             Alert::error('Thất Bại', 'Có gì đó không đúng!');
+        }
         $linhVuc = DB::table('linh_vuc')->get();
         return view('ds-linh-vuc', compact('linhVuc'));
     }
@@ -31,8 +39,6 @@ class LinhVucController extends Controller
      */
     public function create()
     {
-        return view('form-them-linh-vuc');
-
     }
 
     /**
@@ -43,10 +49,19 @@ class LinhVucController extends Controller
      */
     public function store(Request $request)
     {
-        $linhVuc = new LinhVuc;
-        $linhVuc->ten = $request->ten_linh_vuc;
-        $linhVuc->save();
-        return redirect()->action('LinhVucController@index')->with('added',' ');
+        $input = $request->input('ten_linh_vuc');
+
+        if ($input == '') 
+        {
+            return redirect()->route('linh-vuc/ds-linh-vuc')->with('error',' ');
+        }else 
+        {
+            $linhVuc = new LinhVuc;
+            $linhVuc->ten = $request->ten_linh_vuc;
+            $linhVuc->save();
+            return redirect()->route('linh-vuc/ds-linh-vuc')->withSuccessMessage('Thêm mới thành công!');
+        }
+        
     }
 
     /**
@@ -68,28 +83,7 @@ class LinhVucController extends Controller
      */
     public function edit($id)
     {
-        //chọn dữ liệu đúng với điều kiện id bằng với id nhận được khi người dùng click vào Edit.
-        $linhVuc = LinhVuc::findOrFail($id);
-        $pageName = 'Cập Nhật Lĩnh Vực'; // Khai báo tên trang.
-        return view('form-sua-linh-vuc',compact('linhVuc','pageName')); //gom dữ liệu trả về trang form-sua-linh-vuc.
     }
-
-/*
-    public function index_2()
-    {
-        $linhVuc = DB::table('linh_vuc')->get();
-        return view('form-sua-n-linh-vuc', compact('linhVuc'));
-    }
-    public function update_2(Request $request, $id)
-    {
-        $linhVuc = LinhVuc::find($id);
-        $linhVuc->ten = $request->input('ten_linh_vuc_moi');
-
-        $linhVuc->save();
-        
-        return redirect()->action('LinhVucController@index')->with('updated',' ');
-    }
-*/
     /**
      * Update the specified resource in storage.
      *
@@ -99,12 +93,18 @@ class LinhVucController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $linhVuc = LinhVuc::find($id);
-        $linhVuc->ten = $request->input('ten_linh_vuc_moi');
-
-        $linhVuc->save();
-        
-        return redirect()->action('LinhVucController@index')->with('updated',' ');
+        $input = $request->input('ten_linh_vuc_moi');
+        if ($input == '') 
+        {
+            return redirect()->route('linh-vuc/ds-linh-vuc')->with('error',' ');
+        }
+        else 
+        {
+            $linhVuc = LinhVuc::find($id);
+            $linhVuc->ten = $request->input('ten_linh_vuc_moi');
+            $linhVuc->save();
+            return redirect()->action('LinhVucController@index')->withSuccessMessage('Cập nhật thành công!');
+        }
     }
 
 
@@ -118,8 +118,14 @@ class LinhVucController extends Controller
     public function destroy($id)
     {
         $linhVuc = LinhVuc::find($id);
-
-        $linhVuc->delete();
-        return redirect()->action('LinhVucController@index')->with('deleted',' ');
+        if($linhVuc!=null)
+        {
+            $linhVuc->delete();
+            return redirect()->action('LinhVucController@index')->withSuccessMessage('Xóa thành công!');
+        }
+        else
+        {
+            return redirect()->action('LinhVucController@index')->with('error',' ');
+        }
     }
 }

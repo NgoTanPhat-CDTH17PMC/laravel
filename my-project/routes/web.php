@@ -17,6 +17,7 @@ Route::get('dang-xuat', 'QuanTriVienController@dangXuat')->name('dang-xuat');
 
 Route::middleware('auth')->group(function(){
 	Route::get('/', function (){
+		
 	    return view('layout');
 	})->name('trang-chu');
 

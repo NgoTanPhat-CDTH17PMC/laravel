@@ -4,6 +4,7 @@
 <link href="{{ asset('assets/libs/datatables/responsive.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/libs/datatables/buttons.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/libs/datatables/select.bootstrap4.css') }}" rel="stylesheet" type="text/css" />
+
 @endsection
 @section('js')
 <script src="{{ asset('assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
@@ -33,46 +34,19 @@
 			}
 			});
 			});
+	
+
 </script>
+
 @endsection
 
-<?php 
-	use App\Http\Controllers\LinhVucController;
-	echo LinhVucController::cleanup();  // Reset auto increment
-
-
-	function Alert($msg) {
-    echo '<script type="text/javascript">alert("' . $msg . '")</script>';
-}
-?>
-
 @section('main-content')
-
-<!-- Thanh thong bao -->
-@if (session('deleted'))
-	<?php
-		Alert("Xóa thành công!");		
-	?>
-@endif
-
-@if (session('updated'))
- 	<?php
-		Alert("Cập nhật thành công!");		
-	?>
-@endif
-
-@if (session('added'))
- 	<?php
-		Alert("Thêm mới thành công!");		
-	?>
-@endif
-
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-body">
 				<h4 class="header-title">Danh Sách Lĩnh Vực</h4>
-
+				
 				 <form action="{{ route('linh-vuc/xu-li-them-moi') }}" method="POST">
                 	@csrf
 					<button type="button" class="btn btn-primary waves-effect waves-light"data-toggle="modal" data-target="#myModalThemMoi" id="open" style="margin-top:20px; margin-bottom:20px">Thêm Mới</button>
@@ -101,6 +75,7 @@
 				            </div>
 				        </div>
 				    </div>
+
 				</form>
 
 				<table id="linh-vuc-datatable" class="table dt-responsive nowrap">
@@ -161,8 +136,8 @@
 								<form method="POST" action="xoa/{{$table->id}}" style="float:left" >
 									@method('DELETE')
 									@csrf
-									<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#myModalXoa" id="open">Xóa</button>
-									<div class="modal fade" tabindex="-1" role="dialog" id="myModalXoa">
+									<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#myModalXoa{{$table->id}}" id="open">Xóa</button>
+									<div class="modal fade" tabindex="-1" role="dialog" id="myModalXoa{{$table->id}}">
 								        <div class="modal-dialog modal-dialog-centered" role="document">
 								            <div class="modal-content">
 								                <div class="alert alert-danger" style="display:none"></div>
@@ -174,7 +149,7 @@
 								                </div>
 								                <div class="modal-body">
 								                    <div class="row">
-								                        <h4 style="padding-left: 80px;">Bạn có muốn xóa lĩnh vực {{$table->ten}} ?</h4>
+								                        <h4 style="padding-left: 75px;">Bạn có muốn xóa lĩnh vực {{$table->ten}} ?</h4>
 								                    </div>
 								                </div>
 								                <div class="modal-footer">
@@ -185,7 +160,7 @@
 								            </div>
 								        </div>
 								    </div>
-								</form>	
+								</form>
 							</td>
 						</tr>
 						@endforeach
@@ -197,3 +172,9 @@
 </div>
 			<!-- end row-->
 @endsection
+
+<!--<form method="POST" action="xoa/{{$table->id}}" style="float:left" >
+	@method('DELETE')
+	@csrf
+	<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" >Xóa</button>
+</form>		-->
