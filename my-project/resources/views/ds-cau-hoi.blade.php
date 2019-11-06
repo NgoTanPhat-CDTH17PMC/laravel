@@ -136,7 +136,7 @@
 								<p>Đáp án: {{ $table->dap_an }}</p>
 							</td>
 							<td>
-								<form action="cap-nhat-1/{{ $table->id }}" method="POST" id="form" style="float:left">
+								<form action="cap-nhat/{{ $table->id }}" method="POST" id="form" style="float:left">
 								    @method('PATCH')
 								    @csrf
 								  	<button type="button" class="btn btn-info btn-rounded waves-effect waves-light" 
