@@ -20,6 +20,12 @@ class NguoiChoiController extends Controller
      */
     public function index()
     {
+        if(session('success_message')){
+            Alert::success('Hoàn Tất', session('success_message'));
+        }
+        if(session('error')){
+             Alert::error('Thất Bại', session('error'));
+        }
         $nguoiChoi = DB::table('nguoi_choi')->get();
         return view('ds-nguoi-choi', compact('nguoiChoi'));
     }
@@ -90,6 +96,15 @@ class NguoiChoiController extends Controller
         $nguoiChoi = NguoiChoi::find($id);
 
         $nguoiChoi->delete();
-        return redirect()->action('NguoiChoiController@index')->with('deleted',' ');
+       
+        if($nguoiChoi!=null)
+        {
+            $nguoiChoi->delete();
+             return redirect()->action('NguoiChoiController@index')->withSuccessMessage('Xóa thành công!');
+        }
+        else
+        {
+            return redirect()->action('NguoiChoiController@index')->with('error','Xoá thất bại!');
+        }
     }
 }

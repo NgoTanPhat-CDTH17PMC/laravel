@@ -47,9 +47,6 @@
 		<div class="card">
 			<div class="card-body">
 				<h4 class="header-title">Danh Sách Người Chơi</h4>
-				<a  href="{{ route('nguoi-choi/them-moi') }}">
-					<button type="button" class="btn btn-primary waves-effect waves-light" style="margin-top:20px; margin-bottom:20px">Thêm Mới</button>
-				</a>
 
 				<br>
 
@@ -80,12 +77,34 @@
 							<td>{{ $table->credit }}</td>
 							
 							<td>
-								<a href="cap-nhat-1/{{$table->id}}" style="float:left"><button type="button" class="btn btn-info btn-rounded waves-effect waves-light">Cập nhật</button></a>
 								<form method="POST" action="xoa/{{$table->id}}" style="float:left" >
 									@method('DELETE')
 									@csrf
-									<button type="submit" onclick="return confirm('Bạn có muốn xóa?')" class="btn btn-danger btn-rounded waves-effect waves-light" >Xóa</button>
-								</form>	
+									<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#myModalXoa{{$table->id}}" id="open">Xóa</button>
+									<div class="modal fade" tabindex="-1" role="dialog" id="myModalXoa{{$table->id}}">
+								        <div class="modal-dialog modal-dialog-centered" role="document">
+								            <div class="modal-content">
+								                <div class="alert alert-danger" style="display:none"></div>
+								                <div class="modal-header">
+								                    <h5 class="modal-title">Xóa Người Chơi</h5>
+								                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								                        <span aria-hidden="true">&times;</span>
+								                    </button>
+								                </div>
+								                <div class="modal-body">
+								                    <div class="row">
+								                        <h4 style="padding-left: 75px;">Bạn có muốn xóa người chơi {{$table->ten_dang_nhap}} ?</h4>
+								                    </div>
+								                </div>
+								                <div class="modal-footer">
+								                    
+								                    <button  class="btn btn-success" id="ajaxSubmit">Đồng Ý</button>
+								                    <button type="button" class="btn btn-danger" data-dismiss="modal">Từ Chối</button>
+								                </div>
+								            </div>
+								        </div>
+								    </div>
+								</form>
 							</td>
 						</tr>
 						@endforeach

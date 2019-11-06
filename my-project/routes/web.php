@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function(){
 			Route::get('khoi-phuc/{id}', 'LinhVucController@restore')->name('khoi-phuc');
 		});
 	});
-	
+
 	Route::prefix('cau-hoi')->group(function(){
 		Route::name('cau-hoi/')->group(function () {
 
@@ -133,12 +133,6 @@ Route::middleware('auth')->group(function(){
 		Route::name('nguoi-choi/')->group(function () {
 
 			Route::get('ds-nguoi-choi', 'NguoiChoiController@index')->name('ds-nguoi-choi');
-
-			Route::get('them-moi', 'NguoiChoiController@create')->name('them-moi');
-			Route::post('xu-li-them-moi', 'NguoiChoiController@store')->name('xu-li-them-moi');
-
-			Route::get('cap-nhat-1/{id}','NguoiChoiController@edit')->name('cap-nhat-1');
-			Route::PATCH('cap-nhat-1/{id}', 'NguoiChoiController@update');
 
 			Route::DELETE('xoa/{id}', 'NguoiChoiController@destroy')->name('xoa');
 		});
