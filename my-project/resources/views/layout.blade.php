@@ -26,6 +26,10 @@
 	<body>
 		@php
 			$ho_ten = Auth::user()->ho_ten;
+			use RealRashid\SweetAlert\Facades\Alert;
+			if(session('success_message')){
+            	Alert::success('Thành công',session('success_message'));
+        	}
 		@endphp
 
 		@include('sweetalert::alert')

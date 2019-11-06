@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
-
 class QuanTriVienController extends Controller
 {
     /**
@@ -24,12 +23,15 @@ class QuanTriVienController extends Controller
 
     public function dangNhap()
     {
-        if(session('success_message')){
-            Alert::success('Thành công',session('success_message'));
+        if(session('success_message'))
+        {
+            Alert::success('Thành công', session('success_message'));
         }
-        if(session('error')){
-             Alert::error('Thất Bại','Có gì đó không đúng!');
+        if(session('error'))
+        {
+             Alert::error('Thất Bại', session('error'));
         }
+        
         return view('dang-nhap');
     }
 
@@ -42,20 +44,7 @@ class QuanTriVienController extends Controller
         {
             return redirect()->route('trang-chu')->withSuccessMessage('Đăng nhập thành công!');
         }
-        else{
-            return redirect()->route('dang-nhap')->with('error',' ');
-        }
-        //return "Đăng nhập thất bại!";
-
-        /*$qtv = QuanTriVien::where('ten_dang_nhap', $ten_dang_nhap)->first();
-        if ($qtv == null)
-        {
-            return "Sai tên đăng nhập!";
-        }
-        if (!Hash::check($mat_khau, $qtv->mat_khau))
-        {
-            return "Sai mật khẩu!";
-        }*/
+            return redirect()->route('dang-nhap')->with('error', 'Sai tài khoản hoặc mật khẩu!');
     }
 
     public function layThongTin()
@@ -66,7 +55,7 @@ class QuanTriVienController extends Controller
     public function dangXuat()
     {
         Auth::logout();
-        return redirect()->route('dang-nhap')->withSuccessMessage('Đăng xuất thành công!');
+        return view('dang-xuat');
     }
 
     /**
