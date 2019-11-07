@@ -35,6 +35,17 @@ class CauHoiController extends Controller
         return view('ds-cau-hoi', compact('pageName','cauHoi','linhVuc'));
     }
 
+    public function deleted()
+    {
+        if(session('success_message')){
+            Alert::success('Hoàn Tất', session('success_message'));
+        }
+
+        $linhVuc = LinhVuc::all();
+        $cauHoi = CauHoi::onlyTrashed()->get();
+        return view('bin.cau-hoi-deleted', compact('cauHoi', 'linhVuc'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -83,6 +94,13 @@ class CauHoiController extends Controller
             $cauHoi->save();
             return redirect()->route('cau-hoi/ds-cau-hoi')->withSuccessMessage('Thêm mới thành công!');
         }
+    }
+
+    public function restore($id)
+    {
+        $trip = CauHoi::withTrashed()->where('id', $id)->restore();
+
+        return redirect()->action('CauHoiController@deleted')->withSuccessMessage('Khôi phục thành công!');
     }
 
     /**

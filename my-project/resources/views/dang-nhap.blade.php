@@ -17,11 +17,10 @@
         <script src="{{ asset('assets/js/sweet-alert.min.js') }}"></script>
         <script src="{{ asset('assets/js/sweet-alert.js') }}"></script>
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/sweet-alert.css') }}">
-            @include('sweetalert::alert')
-
     </head>
+    
     <body class="authentication-bg authentication-bg-pattern">
-
+        @include('sweetalert::alert')
         <div class="account-pages mt-5 mb-5">
             <div class="container">
                 <div class="row justify-content-center">
@@ -47,7 +46,7 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label for="mat_khau">Mật khẩu</label>
+                                        <label for="mat_khau">Mật Khẩu</label>
                                         <input class="form-control" type="password" required="" id="mat_khau" name="mat_khau" placeholder="Nhập mật khẩu của bạn...">
                                     </div>
 

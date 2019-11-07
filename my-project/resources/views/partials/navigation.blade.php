@@ -181,7 +181,7 @@
 
 					<!-- LOGO -->
 					<div class="logo-box">
-						<a href="index.html" class="logo text-center">
+						<a href="{{ route('trang-chu') }}" class="logo text-center">
 							<span class="logo-lg">
 								<img src="{{ asset('assets/images/logo-dark.png') }}" alt="" height="26">
 								<!-- <span class="logo-lg-text-dark">Upvex</span> -->
@@ -224,98 +224,29 @@
 
 							<li class="has-submenu">
 								<a href="{{ route('linh-vuc/ds-linh-vuc')}}">
-									<i class="la la-cube"></i>Lĩnh Vực <div class="arrow-down"></div></a>
-								<ul class="submenu">
-									<li>
-										<a href="{{ route('linh-vuc/them-moi')}}">Thêm Mới</a>
-									</li>
-									<li>
-										<a href="apps-contacts.html">Sửa</a>
-									</li>
-									<li>
-										<a href="apps-tickets.html">Xóa</a>
-									</li>
-									
-								</ul>
+									<i class="la la-cube"></i>Lĩnh Vực</a>
 							</li>
 
 							<li class="has-submenu">
-								<a href="{{ route('cau-hoi/ds-cau-hoi')}}"> <i class=" la la-clone"></i>Câu Hỏi 
-									<div class="arrow-down"></div></a>
-									<ul class="submenu">
-										<li>
-											<a href="{{ route('cau-hoi/them-moi')}}">Thêm Mới</a>
-										</li>
-										<li>
-											<a href="#">Cập Nhật</a>
-										</li>
-										<li>
-											<a href="#">Xóa</a>
-										</li>
-									</ul>
+								<a href="{{ route('cau-hoi/ds-cau-hoi')}}"> <i class=" la la-clone"></i>Câu Hỏi</a>
 							</li>
 
 							<li class="has-submenu">
-								<a href="{{ route('goi-credit/ds-goi-credit')}}"> <i class=" la la-diamond"></i>Gói Credit
-									<div class="arrow-down"></div></a>
-									<ul class="submenu">
-										<li>
-											<a href="{{ route('goi-credit/them-moi')}}">Thêm Mới</a>
-										</li>
-										<li>
-											<a href="#">Cập Nhật</a>
-										</li>
-										<li>
-											<a href="#">Xóa</a>
-										</li>
-									</ul>
+								<a href="{{ route('goi-credit/ds-goi-credit')}}"> <i class=" la la-diamond"></i>Gói Credit</a>
 							</li>
 
 							<li class="has-submenu">
 								<a href="#">
-									<i class="la la-cog"></i>Cấu Hình <div class="arrow-down"></div></a>
+									<i class="la la-cog"></i>Cấu Hình<div class="arrow-down"></div></a>
 								<ul class="submenu">
 									<li class="has-submenu">
-										<a href="{{ route('cau-hinh-app/ds-cau-hinh-app')}}"><i class="fe-bookmark mr-1"></i> Cấu Hình App <div class="arrow-down"></div></a>
-										<ul class="submenu">
-											<li>
-											<a href="{{ route('cau-hinh-app/them-moi')}}">Thêm Mới</a>
-											</li>
-											<li>
-												<a href="#">Cập Nhật</a>
-											</li>
-											<li>
-												<a href="#">Xóa</a>
-											</li>
-										</ul>
+										<a href="{{ route('cau-hinh-app/ds-cau-hinh-app')}}"><i class="fe-bookmark mr-1"></i>Cấu Hình App</a>
 									</li>
 									<li class="has-submenu">
-										<a href="{{ route('cau-hinh-diem-cau-hoi/ds-cau-hinh-diem-cau-hoi')}}"><i class="fe-grid mr-1"></i> Cấu Hình Điểm Câu Hỏi <div class="arrow-down"></div></a>
-										<ul class="submenu">
-											<li>
-												<a href="{{ route('cau-hinh-diem-cau-hoi/them-moi')}}">Thêm Mới</a>
-											</li>
-											<li>
-												<a href="#">Cập Nhật</a>
-											</li>
-											<li>
-												<a href="#">Xóa</a>
-											</li>
-										</ul>
+										<a href="{{ route('cau-hinh-diem-cau-hoi/ds-cau-hinh-diem-cau-hoi')}}"><i class="fe-grid mr-1"></i>Cấu Hình Điểm Câu Hỏi</a>
 									</li>
 									<li class="has-submenu">
-										<a href="{{ route('cau-hinh-tro-giup/ds-cau-hinh-tro-giup')}}"><i class="fe-bar-chart-2 mr-1"></i> Cấu Hình Trợ Giúp <div class="arrow-down"></div></a>
-										<ul class="submenu">
-											<li>
-												<a href="{{ route('cau-hinh-tro-giup/them-moi')}}">Thêm Mới</a>
-											</li>
-											<li>
-												<a href="admin-sweet-alert.html">Cập Nhật</a>
-											</li>
-											<li>
-												<a href="admin-nestable.html">Xóa</a>
-											</li>
-										</ul>
+										<a href="{{ route('cau-hinh-tro-giup/ds-cau-hinh-tro-giup')}}"><i class="fe-bar-chart-2 mr-1"></i>Cấu Hình Trợ Giúp</a>
 									</li>
 								</ul>
 							</li>
@@ -324,19 +255,19 @@
 								<a href="{{ route('goi-credit/ds-goi-credit')}}"> <i class=" la la-trash"></i>Thùng Rác
 									<div class="arrow-down"></div></a>
 									<ul class="submenu">
-										<li>
+										<li class="has-submenu">
 											<a href="{{ route('linh-vuc/da-xoa')}}">Lĩnh Vực</a>
 										</li>
-										<li>
-											<a href="#">Câu Hỏi</a>
+										<li class="has-submenu">
+											<a href="{{ route('cau-hoi/da-xoa')}}">Câu Hỏi</a>
 										</li>
-										<li>
+										<li class="has-submenu">
 											<a href="#">Gói Credit</a>
 										</li>
-										<li>
+										<li class="has-submenu">
 											<a href="#">Người Chơi</a>
 										</li>
-										<li>
+										<li class="has-submenu">
 											<a href="#">Quản Trị Viên</a>
 										</li>
 									</ul>

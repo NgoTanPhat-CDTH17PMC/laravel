@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('dang-nhap', 'QuanTriVienController@dangNhap')->name('dang-nhap');
+Route::get('dang-nhap', 'QuanTriVienController@dangNhap')->name('dang-nhap')->middleware('guest');
 Route::post('xu-ly-dang-nhap', 'QuanTriVienController@xuLyDangNhap')->name('xu-ly-dang-nhap');
-Route::get('dang-xuat', 'QuanTriVienController@dangXuat')->name('dang-xuat');
 
 Route::middleware('auth')->group(function(){
+	Route::get('dang-xuat', 'QuanTriVienController@dangXuat')->name('dang-xuat');
+	
 	Route::get('/', function (){
-		
 	    return view('layout');
 	})->name('trang-chu');
 
@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function(){
 			Route::DELETE('xoa/{id}', 'LinhVucController@destroy')->name('xoa');
 
 			Route::get('da-xoa', 'LinhVucController@deleted')->name('da-xoa');
-			Route::get('khoi-phuc/{id}', 'LinhVucController@restore')->name('khoi-phuc');
+			Route::post('khoi-phuc/{id}', 'LinhVucController@restore')->name('khoi-phuc');
 		});
 	});
 
@@ -50,6 +50,9 @@ Route::middleware('auth')->group(function(){
 			Route::PATCH('cap-nhat/{id}', 'CauHoiController@update');
 
 			Route::DELETE('xoa/{id}', 'CauHoiController@destroy')->name('xoa');
+
+			Route::get('da-xoa', 'CauHoiController@deleted')->name('da-xoa');
+			Route::post('khoi-phuc/{id}', 'CauHoiController@restore')->name('khoi-phuc');
 		});
 	});
 	Route::prefix('cau-hinh-app')->group(function(){
