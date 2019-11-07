@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CauHinhApp;
 use Illuminate\Support\Facades\DB;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CauHinhAppController extends Controller
 {
@@ -22,7 +22,16 @@ class CauHinhAppController extends Controller
      */
     public function index()
     {
-       $cauHinhApp = DB::table('cau_hinh_app')->get();
+
+        if(session('success_message')){
+            Alert::success('Hoàn Tất', session('success_message'));
+        }
+
+        if(session('error')){
+             Alert::error('Thất Bại', session('error'));
+        }
+
+        $cauHinhApp = DB::table('cau_hinh_app')->get();
         return view('ds-cau-hinh-app', compact('cauHinhApp'));
     }
 
@@ -33,7 +42,6 @@ class CauHinhAppController extends Controller
      */
     public function create()
     {
-        return view('form-them-cau-hinh-app');
     }
 
     /**
@@ -44,12 +52,15 @@ class CauHinhAppController extends Controller
      */
     public function store(Request $request)
     {
-       $cauHinhApp = new CauHinhApp;
-       $cauHinhApp->co_hoi_sai = $request->co_hoi_sai;
-       $cauHinhApp->thoi_gian_tra_loi=$request->thoi_gian_tra_loi;
-        
-       $cauHinhApp->save();
-        return redirect()->action('CauHinhAppController@index')->with('added',' ');
+
+
+    $cauHinhApp = new CauHinhApp;
+    $cauHinhApp->co_hoi_sai = $request->co_hoi_sai;
+    $cauHinhApp->thoi_gian_tra_loi=$request->thoi_gian_tra_loi;
+
+    $cauHinhApp->save();
+    return redirect()->route('cau-hinh-app/ds-cau-hinh-app')->withSuccessMessage('Thêm mới thành công!');
+
     }
 
     /**
@@ -71,9 +82,6 @@ class CauHinhAppController extends Controller
      */
     public function edit($id)
     {
-        $cauHinhApp = CauHinhApp::findOrFail($id);
-        $pageName = 'Cập Nhật Cấu Hình App'; // Khai báo tên trang.
-        return view('form-sua-cau-hinh-app',compact('cauHinhApp','pageName'));
     }
 
     /**
@@ -91,7 +99,7 @@ class CauHinhAppController extends Controller
         $cauHinhApp->thoi_gian_tra_loi=$request->input('thoi_gian_tra_loi');
         $cauHinhApp->save();
         
-        return redirect()->action('CauHinhAppController@index')->with('updated',' ');
+        return redirect()->action('CauHinhAppController@index')->withSuccessMessage('Cập nhật thành công!');
     }
 
     /**
@@ -106,6 +114,6 @@ class CauHinhAppController extends Controller
 
         $cauHinhApp->delete();
 
-        return redirect()->action('CauHinhAppController@index')->with('deleted',' ');
+        return redirect()->action('CauHinhAppController@index')->withSuccessMessage('Xóa thành công!');
     }
 }

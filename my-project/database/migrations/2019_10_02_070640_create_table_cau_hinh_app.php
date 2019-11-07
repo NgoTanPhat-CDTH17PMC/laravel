@@ -15,7 +15,7 @@ class CreateTableCauHinhApp extends Migration
     {
         Schema::create('cau_hinh_app', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('cau_hoi_sai');
+            $table->integer('co_hoi_sai');
             $table->integer('thoi_gian_tra_loi');
             $table->timestamps();
             $table->softDeletes();

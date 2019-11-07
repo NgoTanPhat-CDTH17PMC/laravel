@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\CauHinhTroGiup;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class CauHinhTroGiupController extends Controller
@@ -21,7 +22,14 @@ class CauHinhTroGiupController extends Controller
      */
     public function index()
     {
-       $cauHinhTroGiup = DB::table('cau_hinh_tro_giup')->get();
+        if(session('success_message')){
+            Alert::success('Hoàn Tất', session('success_message'));
+        }
+
+        if(session('error')){
+             Alert::error('Thất Bại', session('error'));
+        }
+        $cauHinhTroGiup = DB::table('cau_hinh_tro_giup')->get();
         return view('ds-cau-hinh-tro-giup', compact('cauHinhTroGiup'));
     }
 
