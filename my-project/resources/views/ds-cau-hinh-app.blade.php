@@ -83,10 +83,10 @@
 				<table id="cau-hinh-app-datatable" class="table dt-responsive nowrap">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Cơ hội sai</th>
-							<th>Thời gian trả lời</th>
-							<th>Thao tác</th>
+							<th style="display: none; width: 15%">ID</th>
+							<th style="display: none; width: 30%">Cơ hội sai</th>
+							<th style="display: none; width: 40%">Thời gian trả lời</th>
+							<th style="display: none; width: 20%">Thao tác</th>
 						</tr>
 					</thead>
 					

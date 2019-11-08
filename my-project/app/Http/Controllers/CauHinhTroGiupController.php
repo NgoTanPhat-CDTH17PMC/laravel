@@ -57,7 +57,7 @@ class CauHinhTroGiupController extends Controller
         $cauHinhTroGiup->credit=$request->credit;
         
        $cauHinhTroGiup->save();
-        return redirect()->action('CauHinhTroGiupController@index')->with('added',' ');
+        return redirect()->action('CauHinhTroGiupController@index')->withSuccessMessage('Thêm mới thành công!');;
     }
 
     /**
@@ -99,7 +99,7 @@ class CauHinhTroGiupController extends Controller
         $cauHinhTroGiup->credit=$request->input('credit');
         $cauHinhTroGiup->save();
         
-        return redirect()->action('CauHinhTroGiupController@index')->with('updated',' ');
+        return redirect()->action('CauHinhTroGiupController@index')->withSuccessMessage('Cập nhật thành công!');
     }
 
     /**
@@ -114,6 +114,6 @@ class CauHinhTroGiupController extends Controller
 
         $cauHinhTroGiup->delete();
 
-        return redirect()->action('CauHinhTroGiupController@index')->with('deleted',' ');
+        return redirect()->action('CauHinhTroGiupController@index')->withSuccessMessage('Xoá thành công!');
     }
 }

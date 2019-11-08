@@ -112,10 +112,10 @@
 				<table id="cau-hoi-datatable" class="table dt-responsive nowrap">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Lĩnh Vực</th>
-							<th>Nội dung</th>
-							<th>Thao tác</th>
+							<th style="display: none">ID</th>
+							<th style="display: none">Lĩnh Vực</th>
+							<th style="display: none">Nội dung</th>
+							<th style="display: none">Thao tác</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -128,7 +128,7 @@
 								<p>{{ $table->linhVuc->ten }} </p>
 							</td>
 							<td>
-								<p style="display:block; width:240px;">{{ $table->noi_dung }} </p>
+								<p>{{ $table->noi_dung }} </p>
 								<p>Phương án A: {{ $table->phuong_an_a }}</p>
 								<p>Phương án B: {{ $table->phuong_an_b }}</p>
 								<p>Phương án C: {{ $table->phuong_an_c }}</p>

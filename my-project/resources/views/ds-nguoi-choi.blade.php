@@ -53,13 +53,13 @@
 				<table id="nguoi-choi-datatable" class="table dt-responsive nowrap">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Tên đăng nhập</th>
-							<th>Email</th>
-							<th>Hình đại diện</th>
-							<th>Điểm cao nhất</th>
-							<th>Credit</th>
-							<th>Thao tác</th>
+							<th style="display: none">ID</th>
+							<th style="display: none; width:20%">Tên đăng nhập</th>
+							<th style="display: none; width:20%">Email</th>
+							<th style="display: none; width:20%">Hình đại diện</th>
+							<th style="display: none; width:20%">Điểm cao nhất</th>
+							<th style="display: none">Credit</th>
+							<th style="display: none">Thao tác</th>
 						</tr>
 					</thead>
 					
