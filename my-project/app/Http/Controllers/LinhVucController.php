@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\LinhVuc;
 use RealRashid\SweetAlert\Facades\Alert;
+use Validator;
 
 class LinhVucController extends Controller
 {
@@ -59,28 +60,35 @@ class LinhVucController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->input('ten_linh_vuc');
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'ten_linh_vuc' => 'required|min:3|max:255|unique:linh_vuc,ten',
+            ],
 
-        if ($input == '') 
-        {
-            return redirect()->route('linh-vuc/ds-linh-vuc')->with('error','Tên lĩnh vực không được để trống!');
+            [
+                'required' => ':attribute không được để trống!',
+                'min' => ':attribute không được nhỏ hơn :min!',
+                'max' => ':attribute không được lớn hơn :max!',
+                'unique' => ':attribute đã tồn tại!',
+            ],
+
+            [
+                'ten_linh_vuc' => 'Tên lĩnh vực ',
+            ]
+
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('linh-vuc/ds-linh-vuc')->with('error',$errors->all());
         }
-        else 
+        else
         {
-            $chkLinhVuc = LinhVuc::all();
-            foreach ($chkLinhVuc as $table)
-            {
-                if ($table->ten == $input)
-                {
-                    return redirect()->route('linh-vuc/ds-linh-vuc')->with('error','Tên lĩnh vực đã tồn tại!');
-                }
-            }
-
-            $linhVuc = new LinhVuc;
+            $linhVuc = new LinhVuc;            
             $linhVuc->ten = $request->ten_linh_vuc;
             $linhVuc->save();
             return redirect()->route('linh-vuc/ds-linh-vuc')->withSuccessMessage('Thêm mới thành công!');
-        } 
+        }
     }
 
     public function restore($id)
@@ -119,13 +127,29 @@ class LinhVucController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->input('ten_linh_vuc_moi');
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'ten_linh_vuc_moi' => 'required|min:3|max:255|unique:linh_vuc,ten,'.$id,
+            ],
 
-        if ($input == '') 
-        {
-            return redirect()->route('linh-vuc/ds-linh-vuc')->with('error', 'Tên lĩnh vực mới không được để trống!');
+            [
+                'required' => ':attribute không được để trống!',
+                'min' => ':attribute không được nhỏ hơn :min!',
+                'max' => ':attribute không được lớn hơn :max!',
+                'unique' => ':attribute đã tồn tại!',
+            ],
+
+            [
+                'ten_linh_vuc_moi' => 'Tên lĩnh vực ',
+            ]
+
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('linh-vuc/ds-linh-vuc')->with('error',$errors->all());
         }
-        else 
+        else
         {
             $linhVuc = LinhVuc::find($id);
             $linhVuc->ten = $request->input('ten_linh_vuc_moi');
@@ -133,9 +157,6 @@ class LinhVucController extends Controller
             return redirect()->action('LinhVucController@index')->withSuccessMessage('Cập nhật thành công!');
         }
     }
-
-
-
     /**
      * Remove the specified resource from storage.
      *
