@@ -49,6 +49,7 @@ class LinhVucController extends Controller
      */
     public function create()
     {
+        
     }
 
     /**
