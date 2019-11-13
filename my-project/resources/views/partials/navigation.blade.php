@@ -214,6 +214,9 @@
 								<a href="{{route('nguoi-choi/ds-nguoi-choi')}}"> <i class="la la-briefcase"></i>Người Chơi <div class="arrow-down"></div></a>
 								<ul class="submenu">
 									<li class="has-submenu">
+										<a href=""> <i class="la la-lock"></i>Người Chơi Bị Khoá TK</a>
+									</li>
+									<li class="has-submenu">
 										<a href="{{ route('luot-choi/ds-luot-choi')}}"> <i class="la la-file-text-o"></i>Lượt Chơi</a>
 									</li>
 									<li class="has-submenu">
@@ -263,9 +266,6 @@
 										</li>
 										<li class="has-submenu">
 											<a href="#">Gói Credit</a>
-										</li>
-										<li class="has-submenu">
-											<a href="#">Người Chơi</a>
 										</li>
 										<li class="has-submenu">
 											<a href="#">Quản Trị Viên</a>
