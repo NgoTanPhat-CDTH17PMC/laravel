@@ -62,8 +62,8 @@ Route::middleware('auth')->group(function(){
 			Route::get('them-moi', 'CauHinhAppController@create')->name('them-moi');
 			Route::post('xu-li-them-moi', 'CauHinhAppController@store')->name('xu-li-them-moi');
 
-			Route::get('cap-nhat-1/{id}','CauHinhAppController@edit')->name('cap-nhat-1');
-			Route::PATCH('cap-nhat-1/{id}', 'CauHinhAppController@update');
+			Route::get('cap-nhat/{id}','CauHinhAppController@edit')->name('cap-nhat-1');
+			Route::PATCH('cap-nhat/{id}', 'CauHinhAppController@update');
 
 			Route::DELETE('xoa/{id}', 'CauHinhAppController@destroy')->name('xoa');
 		});
@@ -76,8 +76,8 @@ Route::middleware('auth')->group(function(){
 			Route::get('them-moi', 'CauHinhDiemCauHoiController@create')->name('them-moi');
 			Route::post('xu-li-them-moi', 'CauHinhDiemCauHoiController@store')->name('xu-li-them-moi');
 
-			Route::get('cap-nhat-1/{id}','CauHinhDiemCauHoiController@edit')->name('cap-nhat-1');
-			Route::PATCH('cap-nhat-1/{id}', 'CauHinhDiemCauHoiController@update');
+			Route::get('cap-nhat/{id}','CauHinhDiemCauHoiController@edit')->name('cap-nhat-1');
+			Route::PATCH('cap-nhat/{id}', 'CauHinhDiemCauHoiController@update');
 
 			Route::DELETE('xoa/{id}', 'CauHinhDiemCauHoiController@destroy')->name('xoa');
 		});

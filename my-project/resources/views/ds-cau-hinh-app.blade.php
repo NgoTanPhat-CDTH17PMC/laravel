@@ -47,22 +47,46 @@
 		<div class="card">
 			<div class="card-body">
 				<h4 class="header-title">Danh Sách Cấu Hình App</h4>
-				<a  href="{{ route('cau-hinh-app/them-moi') }}">
-					<button type="button" class="btn btn-primary waves-effect waves-light" style="margin-top:20px; margin-bottom:20px">Thêm Mới</button>
-				</a>
-				<a  href="cap-nhat-n">
-					<button type="button" class="btn btn-primary waves-effect waves-light" style="margin-left:20px; margin-right:20px">Cập nhật</button>
-				</a>
-				<a  href="#">
-					<button type="button" class="btn btn-primary waves-effect waves-light">Xóa</button>
-				</a>
+
+				<form action="{{ route('cau-hinh-app/xu-li-them-moi') }}" method="POST">
+                	@csrf
+					<button type="button" class="btn btn-primary waves-effect waves-light"data-toggle="modal" data-target="#myModalThemMoi" id="open" style="margin-top:20px; margin-bottom:20px">Thêm Mới</button>
+					<div class="modal fade" tabindex="-1" role="dialog" id="myModalThemMoi" >
+				        <div class="modal-dialog modal-dialog-centered" role="document">
+				            <div class="modal-content">
+				                <div class="alert alert-danger" style="display:none"></div>
+				                <div class="modal-header">
+				                    <h5 class="modal-title">Thêm Mới Cấu Hình App</h5>
+				                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				                        <span aria-hidden="true">&times;</span>
+				                    </button>
+				                </div>
+				                <div class="modal-body">
+				                    <div class="row">
+				                        <div class="form-group col-md-8">
+				                            <label for="co_hoi_sai">Cơ hội sai:</label>
+                    						<input type="text" class="form-control" name="co_hoi_sai" id="co_hoi_sai" placeholder="Nhập vào cơ hội sai">
+                    						<label for="thoi_gian_tra_loi">Thời gian trả lời </label>
+                    						<input type="text" class="form-control" name="thoi_gian_tra_loi" id="thoi_gian_tra_loi" placeholder="Nhập vào thời gian trả lời">
+				                        </div>
+				                    </div>
+				                </div>
+				                <div class="modal-footer">
+				                    <button  class="btn btn-success" id="ajaxSubmit">Thêm mới</button>
+				                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+				</form>
+
 				<table id="cau-hinh-app-datatable" class="table dt-responsive nowrap">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>Cơ hội sai</th>
-							<th>Thời gian trả lời</th>
-							<th>Thao tác</th>
+							<th style="display: none; width: 15%">ID</th>
+							<th style="display: none; width: 30%">Cơ hội sai</th>
+							<th style="display: none; width: 40%">Thời gian trả lời</th>
+							<th style="display: none; width: 20%">Thao tác</th>
 						</tr>
 					</thead>
 					
@@ -74,12 +98,73 @@
 							<td>{{ $table->co_hoi_sai }}</td>
 							<td>{{ $table->thoi_gian_tra_loi }}</td>
 							<td>
-								<a href="cap-nhat-1/{{$table->id}}" style="float:left"><button type="button" class="btn btn-info btn-rounded waves-effect waves-light">Cập nhật</button></a>
+								<form action="cap-nhat/{{ $table->id }}" method="POST" id="form" style="float:left">
+								    @method('PATCH')
+								    @csrf
+								  	<button type="button" class="btn btn-info btn-rounded waves-effect waves-light" 
+									data-toggle="modal" data-target="#myModalCapNhat{{$table->id}}" id="open">Cập nhật</button>
+								    <div class="modal fade" tabindex="-1" role="dialog" id="myModalCapNhat{{$table->id}}">
+								        <div class="modal-dialog modal-dialog-centered" role="document">
+								            <div class="modal-content">
+								                <div class="alert alert-danger" style="display:none"></div>
+								                <div class="modal-header">
+
+								                    <h5 class="modal-title">Cập Nhật Cấu Hình App</h5>
+								                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								                        <span aria-hidden="true">&times;</span>
+								                    </button>
+								                </div>
+								                <div class="modal-body">
+								                    <div class="row">
+								                        <div class="form-group col-md-8">
+								                            <label for="co_hoi_sai">Cơ hội sai</label>
+								                            <input type="text" class="form-control" name="co_hoi_sai" id="co_hoi_sai" value="{{ $table->co_hoi_sai }}"></br>
+								                        </div>
+								                    </div>
+								                    <div class="row">
+								                        <div class="form-group col-md-8">
+								                            <label for="thoi_gian_tra_loi">Thời gian trả lời</label>
+								                            <input type="text" class="form-control" name="thoi_gian_tra_loi" id="thoi_gian_tra_loi" value="{{ $table->thoi_gian_tra_loi }}">
+								                        </div>
+								                    </div>
+								                </div>
+								                <div class="modal-footer">
+								                    
+								                    <button  class="btn btn-success" id="ajaxSubmit">Lưu thay đổi</button>
+								                    <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+								                </div>
+								            </div>
+								        </div>
+								    </div>
+								</form>
 								<form method="POST" action="xoa/{{$table->id}}" style="float:left" >
 									@method('DELETE')
 									@csrf
-									<button type="submit" onclick="return confirm('Bạn có muốn xóa?')" class="btn btn-danger btn-rounded waves-effect waves-light" >Xóa</button>
-								</form>	
+									<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#myModalXoa{{$table->id}}" id="open">Xóa</button>
+									<div class="modal fade" tabindex="-1" role="dialog" id="myModalXoa{{$table->id}}">
+								        <div class="modal-dialog modal-dialog-centered" role="document">
+								            <div class="modal-content">
+								                <div class="alert alert-danger" style="display:none"></div>
+								                <div class="modal-header">
+								                    <h5 class="modal-title">Xóa Cấu Hình App</h5>
+								                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								                        <span aria-hidden="true">&times;</span>
+								                    </button>
+								                </div>
+								                <div class="modal-body">
+								                    <div class="row">
+								                        <h4 style="padding-left: 75px;">Bạn có muốn xóa cấu hình app này?</h4>
+								                    </div>
+								                </div>
+								                <div class="modal-footer">
+								                    
+								                    <button  class="btn btn-success" id="ajaxSubmit">Đồng Ý</button>
+								                    <button type="button" class="btn btn-danger" data-dismiss="modal">Từ Chối</button>
+								                </div>
+								            </div>
+								        </div>
+								    </div>
+								</form>
 							</td>
 						</tr>
 						@endforeach

@@ -39,17 +39,15 @@
 </script>
 
 @endsection
-
 @section('main-content')
 <div class="row">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-body">
 				<h4 class="header-title">Danh Sách Lĩnh Vực</h4>
-				
-				 <form action="{{ route('linh-vuc/xu-li-them-moi') }}" method="POST">
+				<form action="{{ route('linh-vuc/xu-li-them-moi') }}" method="POST">
                 	@csrf
-					<button type="button" class="btn btn-primary waves-effect waves-light"data-toggle="modal" data-target="#myModalThemMoi" id="open" style="margin-top:20px; margin-bottom:20px">Thêm Mới</button>
+					<button type="button" class="btn btn-primary waves-effect waves-light"data-toggle="modal" data-target="#myModalThemMoi" id="openthem" style="margin-top:20px; margin-bottom:20px">Thêm Mới</button>
 					<div class="modal fade" tabindex="-1" role="dialog" id="myModalThemMoi" >
 				        <div class="modal-dialog modal-dialog-centered" role="document">
 				            <div class="modal-content">
@@ -63,7 +61,9 @@
 				                <div class="modal-body">
 				                    <div class="row">
 				                        <div class="form-group col-md-8">
+
 				                            <label for="ten_linh_vuc">Tên lĩnh vực </label>
+				                            
                     						<input type="text" class="form-control" name="ten_linh_vuc" id="ten_linh_vuc" placeholder="Nhập vào tên lĩnh vực">
 				                        </div>
 				                    </div>
@@ -75,7 +75,6 @@
 				            </div>
 				        </div>
 				    </div>
-
 				</form>
 
 				<table id="linh-vuc-datatable" class="table dt-responsive nowrap">
@@ -169,6 +168,7 @@
 			</div> <!-- end card body-->
 		</div> <!-- end card -->
 	</div><!-- end col-->
-</div>
-			<!-- end row-->
+</div>			<!-- end row-->
 @endsection
+
+
