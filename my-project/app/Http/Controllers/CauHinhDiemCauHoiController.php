@@ -55,8 +55,8 @@ class CauHinhDiemCauHoiController extends Controller
         $cauHinhDiemCauHoi->diem=$request->diem;
 
         $cauHinhDiemCauHoi->save();
-        return redirect()->route('cau-hinh-diem-cau-hoi/ds-cau-hinh-diem-cau-hoi')->withSuccessMessage('Thêm mới thành công!');    }
-
+        return redirect()->route('cau-hinh-diem-cau-hoi/ds-cau-hinh-diem-cau-hoi')->withSuccessMessage('Thêm mới thành công!');    
+    }
     /**
      * Display the specified resource.
      *
@@ -93,7 +93,7 @@ class CauHinhDiemCauHoiController extends Controller
         $cauHinhDiemCauHoi->diem=$request->input('diem');
         $cauHinhDiemCauHoi->save();
         
-    return redirect()->action('CauHinhDiemCauHoiController@index')->withSuccessMessage('Cập nhật thành công!');
+        return redirect()->action('CauHinhDiemCauHoiController@index')->withSuccessMessage('Cập nhật thành công!');
     }
 
     /**

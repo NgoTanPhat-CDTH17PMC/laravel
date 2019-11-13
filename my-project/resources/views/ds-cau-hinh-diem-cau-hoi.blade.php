@@ -48,7 +48,7 @@
 		<div class="card">
 			<div class="card-body">
 				<h4 class="header-title">Danh Sách Cấu Hình Điểm Câu Hỏi</h4>
-				<form action="{{ route('cau-hinh-app/xu-li-them-moi') }}" method="POST">
+				<form action="{{ route('cau-hinh-diem-cau-hoi/xu-li-them-moi') }}" method="POST">
                 	@csrf
 					<button type="button" class="btn btn-primary waves-effect waves-light"data-toggle="modal" data-target="#myModalThemMoi" id="open" style="margin-top:20px; margin-bottom:20px">Thêm Mới</button>
 					<div class="modal fade" tabindex="-1" role="dialog" id="myModalThemMoi" >
@@ -116,9 +116,6 @@
 								                    <div class="row">
 								                        <div class="form-group col-md-8">
 								                            <select class="form-control" name="linh_vuc_id" id="linh_vuc_id" > 
-									                            <option disabled="true" selected="true">
-									                                Chọn thứ tự... 
-									                            </option>
 								                                <option value="{{$table->thu_tu}}">{{$table->thu_tu}}
 								                                </option>
 									                        </select>

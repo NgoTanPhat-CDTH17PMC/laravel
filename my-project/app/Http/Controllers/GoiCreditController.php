@@ -21,6 +21,12 @@ class GoiCreditController extends Controller
      */
     public function index()
     {
+        if(session('success_message')){
+            Alert::success('Hoàn Tất', session('success_message'));
+        }
+        if(session('error')){
+             Alert::error('Thất Bại', session('error'));
+        }
         $goiCredit = DB::table('goi_credit')->get();
         return view('ds-goi-credit', compact('goiCredit'));
     }
@@ -32,7 +38,6 @@ class GoiCreditController extends Controller
      */
     public function create()
     {
-        return view('form-them-goi-credit');
     }
 
     /**
@@ -48,7 +53,7 @@ class GoiCreditController extends Controller
         $goiCredit->credit = $request->credit;
         $goiCredit->so_tien = $request->so_tien;
         $goiCredit->save();
-        return redirect()->action('GoiCreditController@index')->with('added',' ');
+        return redirect()->action('GoiCreditController@index')->withSuccessMessage('Thêm mới thành công!');
     }
 
     /**
@@ -70,9 +75,6 @@ class GoiCreditController extends Controller
      */
     public function edit($id)
     {
-        $goiCredit = GoiCredit::findOrFail($id);
-        $pageName = 'Cập Nhật Gói Credit'; // Khai báo tên trang.
-        return view('form-sua-goi-credit',compact('goiCredit','pageName'));
     }
 
     /**
@@ -91,7 +93,7 @@ class GoiCreditController extends Controller
 
         $goiCredit->save();
         
-        return redirect()->action('GoiCreditController@index')->with('updated',' ');
+        return redirect()->action('GoiCreditController@index')->withSuccessMessage('Cập nhật thành công!');
     }
 
     /**
@@ -105,6 +107,6 @@ class GoiCreditController extends Controller
         $goiCredit = GoiCredit::find($id);
 
         $goiCredit->delete();
-        return redirect()->action('GoiCreditController@index')->with('deleted',' ');
+        return redirect()->action('GoiCreditController@index')->withSuccessMessage('Xóa thành công!');
     }
 }

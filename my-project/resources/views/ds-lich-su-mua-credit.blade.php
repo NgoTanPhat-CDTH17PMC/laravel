@@ -56,7 +56,6 @@
 							<th>Gói credit</th>
 							<th>Credit</th>
 							<th>Số tiền</th>
-							<th>Thao tác</th>
 						</tr>
 					</thead>
 					
@@ -69,15 +68,6 @@
 							<td>{{ $table->goiCredit->ten_goi}}</td>
 							<td>{{ $table->credit }}</td>
 							<td>{{ $table->so_tien }}</td>
-							
-							<td>
-								<a href="cap-nhat-1/{{$table->id}}" style="float:left"><button type="button" class="btn btn-info btn-rounded waves-effect waves-light">Cập nhật</button></a>
-								<form method="POST" action="xoa/{{$table->id}}" style="float:left" >
-									@method('DELETE')
-									@csrf
-									<button type="submit" onclick="return confirm('Bạn có muốn xóa?')" class="btn btn-danger btn-rounded waves-effect waves-light" >Xóa</button>
-								</form>	
-							</td>
 						</tr>
 						@endforeach
 					</tbody>
