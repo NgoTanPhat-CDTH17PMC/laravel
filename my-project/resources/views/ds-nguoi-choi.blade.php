@@ -78,20 +78,20 @@
 								<form method="POST" action="xoa/{{$table->id}}" style="float:left" >
 									@method('DELETE')
 									@csrf
-									<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#myModalXoa{{$table->id}}" id="open">Xóa</button>
+									<button type="button" class="btn btn-danger btn-rounded waves-effect waves-light" data-toggle="modal" data-target="#myModalXoa{{$table->id}}" id="open">Khoá</button>
 									<div class="modal fade" tabindex="-1" role="dialog" id="myModalXoa{{$table->id}}">
 								        <div class="modal-dialog modal-dialog-centered" role="document">
 								            <div class="modal-content">
 								                <div class="alert alert-danger" style="display:none"></div>
 								                <div class="modal-header">
-								                    <h5 class="modal-title">Xóa Người Chơi</h5>
+								                    <h5 class="modal-title">Khoá Tài Khoản Người Chơi</h5>
 								                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								                        <span aria-hidden="true">&times;</span>
 								                    </button>
 								                </div>
 								                <div class="modal-body">
 								                    <div class="row">
-								                        <h4 style="padding-left: 75px;">Bạn có muốn xóa người chơi {{$table->ten_dang_nhap}} ?</h4>
+								                        <h4 style="padding-left: 75px;">Bạn có muốn khoá tài khoản của người chơi {{$table->ten_dang_nhap}} ?</h4>
 								                    </div>
 								                </div>
 								                <div class="modal-footer">

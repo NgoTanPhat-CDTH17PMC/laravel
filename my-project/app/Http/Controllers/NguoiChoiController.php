@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\NguoiChoi;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class NguoiChoiController extends Controller
 {
@@ -26,7 +27,7 @@ class NguoiChoiController extends Controller
         if(session('error')){
              Alert::error('Thất Bại', session('error'));
         }
-        $nguoiChoi = DB::table('nguoi_choi')->get();
+        $nguoiChoi = NguoiChoi::all();
         return view('ds-nguoi-choi', compact('nguoiChoi'));
     }
 
@@ -100,11 +101,11 @@ class NguoiChoiController extends Controller
         if($nguoiChoi!=null)
         {
             $nguoiChoi->delete();
-             return redirect()->action('NguoiChoiController@index')->withSuccessMessage('Xóa thành công!');
+             return redirect()->action('NguoiChoiController@index')->withSuccessMessage('Khoá tài khoản thành công!');
         }
         else
         {
-            return redirect()->action('NguoiChoiController@index')->with('error','Xoá thất bại!');
+            return redirect()->action('NguoiChoiController@index')->with('error','Khoá tài khoản thất bại!');
         }
     }
 }
