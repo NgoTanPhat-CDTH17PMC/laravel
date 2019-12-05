@@ -132,7 +132,7 @@
 								                    </div>
 								                    <div class="row">
 								                        <div class="form-group col-md-8">
-								                            <label for="thu_tu">Số Credit:</label>
+								                            <label for="credit">Số Credit:</label>
 								                            <input type="text" class="form-control" name="credit" id="credit" value="{{ $table->credit }}">
 								                        </div>
 								                    </div>

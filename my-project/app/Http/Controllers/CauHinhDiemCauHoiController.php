@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CauHinhDiemCauHoi;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Validator;
 
 
 class CauHinhDiemCauHoiController extends Controller
@@ -50,12 +51,39 @@ class CauHinhDiemCauHoiController extends Controller
      */
     public function store(Request $request)
     {
-        $cauHinhDiemCauHoi = new CauHinhDiemCauHoi;
-        $cauHinhDiemCauHoi->thu_tu = $request->thu_tu;
-        $cauHinhDiemCauHoi->diem=$request->diem;
+         $validate = Validator::make(
+                $request->all(),
+                [
+                    'thu_tu' => 'bail|required|min:0|max:100',
+                    'diem' => 'bail|required|min:0|max:500',
+                ],
 
-        $cauHinhDiemCauHoi->save();
-        return redirect()->route('cau-hinh-diem-cau-hoi/ds-cau-hinh-diem-cau-hoi')->withSuccessMessage('Thêm mới thành công!');    
+                [
+                    'required' => ':attribute không được để trống!',
+                    'min' => ':attribute không được nhỏ hơn :min!',
+                    'max' => ':attribute không được lớn hơn :max!',
+
+                ],
+
+                [
+                    'thu_tu' => 'Thứ tự ',
+                    'diem' => 'Điểm ',
+                ]
+
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('cau-hinh-diem-cau-hoi/ds-cau-hinh-diem-cau-hoi')->with('error',$errors->all());
+        }
+        else
+        {
+            $cauHinhDiemCauHoi = new CauHinhDiemCauHoi;
+            $cauHinhDiemCauHoi->thu_tu = $request->thu_tu;
+            $cauHinhDiemCauHoi->diem=$request->diem;
+
+            $cauHinhDiemCauHoi->save();
+            return redirect()->route('cau-hinh-diem-cau-hoi/ds-cau-hinh-diem-cau-hoi')->withSuccessMessage('Thêm mới thành công!'); 
+        }   
     }
     /**
      * Display the specified resource.
@@ -87,13 +115,40 @@ class CauHinhDiemCauHoiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cauHinhDiemCauHoi = CauHinhDiemCauHoi::find($id);
+        $validate = Validator::make(
+                $request->all(),
+                [
+                    'thu_tu' => 'bail|required|min:0|max:100',
+                    'diem' => 'bail|required|min:0|max:500',
+                ],
 
-        $cauHinhDiemCauHoi->thu_tu = $request->input('thu_tu');
-        $cauHinhDiemCauHoi->diem=$request->input('diem');
-        $cauHinhDiemCauHoi->save();
-        
-        return redirect()->action('CauHinhDiemCauHoiController@index')->withSuccessMessage('Cập nhật thành công!');
+                [
+                    'required' => ':attribute không được để trống!',
+                    'min' => ':attribute không được nhỏ hơn :min!',
+                    'max' => ':attribute không được lớn hơn :max!',
+
+                ],
+
+                [
+                    'thu_tu' => 'Thứ tự ',
+                    'diem' => 'Điểm ',
+                ]
+
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('cau-hinh-diem-cau-hoi/ds-cau-hinh-diem-cau-hoi')->with('error',$errors->all());
+        }
+        else
+        {
+            $cauHinhDiemCauHoi = CauHinhDiemCauHoi::find($id);
+
+            $cauHinhDiemCauHoi->thu_tu = $request->input('thu_tu');
+            $cauHinhDiemCauHoi->diem=$request->input('diem');
+            $cauHinhDiemCauHoi->save();
+            
+            return redirect()->action('CauHinhDiemCauHoiController@index')->withSuccessMessage('Cập nhật thành công!');
+        }
     }
 
     /**

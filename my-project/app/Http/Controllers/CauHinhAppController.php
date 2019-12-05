@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CauHinhApp;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Validator;
 
 class CauHinhAppController extends Controller
 {
@@ -52,15 +53,38 @@ class CauHinhAppController extends Controller
      */
     public function store(Request $request)
     {
+            $validate = Validator::make(
+                $request->all(),
+                [
+                    'co_hoi_sai' => 'bail|required|min:0|max:4',
+                    'thoi_gian_tra_loi' => 'bail|required|min:0|max:50',
+                ],
 
+                [
+                    'required' => ':attribute không được để trống!',
+                    'min' => ':attribute không được nhỏ hơn :min!',
+                    'max' => ':attribute không được lớn hơn :max!',
 
-    $cauHinhApp = new CauHinhApp;
-    $cauHinhApp->co_hoi_sai = $request->co_hoi_sai;
-    $cauHinhApp->thoi_gian_tra_loi=$request->thoi_gian_tra_loi;
+                ],
 
-    $cauHinhApp->save();
-    return redirect()->route('cau-hinh-app/ds-cau-hinh-app')->withSuccessMessage('Thêm mới thành công!');
+                [
+                    'co_hoi_sai' => 'Cơ hội sai ',
+                    'thoi_gian_tra_loi' => 'Thời gian trả lời ',
+                ]
 
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('cau-hinh-app/ds-cau-hinh-app')->with('error',$errors->all());
+        }
+        else
+        {
+            $cauHinhApp = new CauHinhApp;
+            $cauHinhApp->co_hoi_sai = $request->co_hoi_sai;
+            $cauHinhApp->thoi_gian_tra_loi=$request->thoi_gian_tra_loi;
+            $cauHinhApp->save();
+            return redirect()->route('cau-hinh-app/ds-cau-hinh-app')->withSuccessMessage('Thêm mới thành công!');
+        }
     }
 
     /**
@@ -93,13 +117,40 @@ class CauHinhAppController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cauHinhApp = CauHinhApp::find($id);
+        $validate = Validator::make(
+            $request->all(),
+            [
+                'co_hoi_sai' => 'bail|required|min:0|max:4',
+                'thoi_gian_tra_loi' => 'bail|required|min:3|max:50',
+            ],
 
-        $cauHinhApp->co_hoi_sai = $request->input('co_hoi_sai');
-        $cauHinhApp->thoi_gian_tra_loi=$request->input('thoi_gian_tra_loi');
-        $cauHinhApp->save();
-        
-        return redirect()->action('CauHinhAppController@index')->withSuccessMessage('Cập nhật thành công!');
+            [
+                'required' => ':attribute không được để trống!',
+                'min' => ':attribute không được nhỏ hơn :min!',
+                'max' => ':attribute không được lớn hơn :max!',
+
+            ],
+
+            [
+                'co_hoi_sai' => 'Cơ hội sai ',
+                'thoi_gian_tra_loi' => 'Thời gian trả lời ',
+            ]
+
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('cau-hinh-app/ds-cau-hinh-app')->with('error',$errors->all());
+        }
+        else
+        {
+            $cauHinhApp = CauHinhApp::find($id);
+
+            $cauHinhApp->co_hoi_sai = $request->input('co_hoi_sai');
+            $cauHinhApp->thoi_gian_tra_loi=$request->input('thoi_gian_tra_loi');
+            $cauHinhApp->save();
+            
+            return redirect()->action('CauHinhAppController@index')->withSuccessMessage('Cập nhật thành công!');
+        }
     }
 
     /**

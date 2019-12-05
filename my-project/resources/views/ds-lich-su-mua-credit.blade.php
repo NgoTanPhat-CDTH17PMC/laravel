@@ -51,7 +51,7 @@
 				<table id="lich-su-mua-credit-datatable" class="table dt-responsive nowrap">
 					<thead>
 						<tr>
-							<th>ID</th>
+							<th  style="display: none; width: 15%">ID</th>
 							<th>Người chơi</th>
 							<th>Gói credit</th>
 							<th>Credit</th>

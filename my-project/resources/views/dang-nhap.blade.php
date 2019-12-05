@@ -37,7 +37,6 @@
                                 </div>
 
                                 <h5 class="auth-title">ĐĂNG NHẬP</h5>
-
                                 <form action="{{ route('xu-ly-dang-nhap') }}" method="POST">
                                     @csrf
                                     <div class="form-group mb-3">

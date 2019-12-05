@@ -36,10 +36,12 @@
 </script>
 @endsection
 
+
 <?php 
 	use App\Http\Controllers\CauHinhDiemCauHoiController;
-	echo CauHinhDiemCauHoiController::cleanup();  // Reset auto increment
+	echo CauHinhDiemCauHoiController::cleanup();
 ?>
+
 
 @section('main-content')
 
@@ -115,7 +117,8 @@
 								                <div class="modal-body">
 								                    <div class="row">
 								                        <div class="form-group col-md-8">
-								                            <select class="form-control" name="linh_vuc_id" id="linh_vuc_id" > 
+								                        	<label for="diem">Thứ tự</label>
+								                            <select class="form-control" name="thu_tu" id="thu_tu" > 
 								                                <option value="{{$table->thu_tu}}">{{$table->thu_tu}}
 								                                </option>
 									                        </select>

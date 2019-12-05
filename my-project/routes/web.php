@@ -21,6 +21,23 @@ Route::middleware('auth')->group(function(){
 	    return view('layout');
 	})->name('trang-chu');
 
+	Route::prefix('quan-tri-vien')->group(function(){
+		Route::name('quan-tri-vien/')->group(function () {
+			Route::get('ds-quan-tri-vien', 'QuanTriVienController@index')->name('ds-quan-tri-vien');
+
+			Route::get('them-moi', 'QuanTriVienController@create')->name('them-moi');
+
+			Route::get('cap-nhat/{id}','QuanTriVienController@edit')->name('cap-nhat');
+			Route::PATCH('cap-nhat/{id}', 'QuanTriVienController@update');
+
+			Route::post('xu-li-them-moi', 'QuanTriVienController@store')->name('xu-li-them-moi');
+			Route::DELETE('xoa/{id}', 'QuanTriVienController@destroy')->name('xoa');
+
+			Route::get('da-xoa', 'QuanTriVienController@deleted')->name('da-xoa');
+			Route::post('khoi-phuc/{id}', 'QuanTriVienController@restore')->name('khoi-phuc');
+		});
+	});
+
 	Route::prefix('linh-vuc')->group(function(){
 		Route::name('linh-vuc/')->group(function () {
 			Route::get('ds-linh-vuc', 'LinhVucController@index')->name('ds-linh-vuc');
@@ -90,8 +107,8 @@ Route::middleware('auth')->group(function(){
 			Route::get('them-moi', 'CauHinhTroGiupController@create')->name('them-moi');
 			Route::post('xu-li-them-moi', 'CauHinhTroGiupController@store')->name('xu-li-them-moi');
 
-			Route::get('cap-nhat-1/{id}','CauHinhTroGiupController@edit')->name('cap-nhat-1');
-			Route::PATCH('cap-nhat-1/{id}', 'CauHinhTroGiupController@update');
+			Route::get('cap-nhat/{id}','CauHinhTroGiupController@edit')->name('cap-nhat-1');
+			Route::PATCH('cap-nhat/{id}', 'CauHinhTroGiupController@update');
 
 			Route::DELETE('xoa/{id}', 'CauHinhTroGiupController@destroy')->name('xoa');
 		});
@@ -104,8 +121,8 @@ Route::middleware('auth')->group(function(){
 			Route::get('them-moi', 'GoiCreditController@create')->name('them-moi');
 			Route::post('xu-li-them-moi', 'GoiCreditController@store')->name('xu-li-them-moi');
 
-			Route::get('cap-nhat-1/{id}','GoiCreditController@edit')->name('cap-nhat-1');
-			Route::PATCH('cap-nhat-1/{id}', 'GoiCreditController@update');
+			Route::get('cap-nhat/{id}','GoiCreditController@edit')->name('cap-nhat-1');
+			Route::PATCH('cap-nhat/{id}', 'GoiCreditController@update');
 
 			Route::DELETE('xoa/{id}', 'GoiCreditController@destroy')->name('xoa');
 		});

@@ -66,7 +66,7 @@ class LinhVucController extends Controller
             [
                 'ten_linh_vuc' => 'required|min:3|max:255|unique:linh_vuc,ten',
             ],
-
+            
             [
                 'required' => ':attribute không được để trống!',
                 'min' => ':attribute không được nhỏ hơn :min!',

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CauHinhTroGiup;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Validator;
 
 
 class CauHinhTroGiupController extends Controller
@@ -40,7 +41,6 @@ class CauHinhTroGiupController extends Controller
      */
     public function create()
     {
-        return view('form-them-cau-hinh-tro-giup');
     }
 
     /**
@@ -51,13 +51,40 @@ class CauHinhTroGiupController extends Controller
      */
     public function store(Request $request)
     {
-        $cauHinhTroGiup = new CauHinhTroGiup;
-        $cauHinhTroGiup->loai_tro_giup = $request->loai_tro_giup;
-        $cauHinhTroGiup->thu_tu = $request->thu_tu;
-        $cauHinhTroGiup->credit=$request->credit;
-        
-       $cauHinhTroGiup->save();
-        return redirect()->action('CauHinhTroGiupController@index')->withSuccessMessage('Thêm mới thành công!');;
+        $validate = Validator::make(
+                $request->all(),
+                [
+                    'loai_tro_giup' => 'bail|required|min:0|max:5',
+                    'thu_tu' => 'bail|required|min:0|max:100',
+                    'credit' => 'bail|required|min:0|max:500',
+                ],
+
+                [
+                    'required' => ':attribute không được để trống!',
+                    'min' => ':attribute không được nhỏ hơn :min!',
+                    'max' => ':attribute không được lớn hơn :max!',
+                ],
+
+                [
+                    'loai_tro_giup' => 'Loại trợ giúp ',
+                    'thu_tu' => 'Thứ tự ',
+                    'credit' => 'Số Credit ',
+                ]
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('cau-hinh-tro-giup/ds-cau-hinh-tro-giup')->with('error',$errors->all());
+        }
+        else
+        {
+            $cauHinhTroGiup = new CauHinhTroGiup;
+            $cauHinhTroGiup->loai_tro_giup = $request->loai_tro_giup;
+            $cauHinhTroGiup->thu_tu = $request->thu_tu;
+            $cauHinhTroGiup->credit=$request->credit;
+
+            $cauHinhTroGiup->save();
+            return redirect()->action('CauHinhTroGiupController@index')->withSuccessMessage('Thêm mới thành công!');
+        }
     }
 
     /**
@@ -79,9 +106,7 @@ class CauHinhTroGiupController extends Controller
      */
     public function edit($id)
     {
-        $cauHinhTroGiup = CauHinhTroGiup::findOrFail($id);
-        $pageName = 'Cập Nhật Cấu Hình Trợ Giúp'; // Khai báo tên trang.
-        return view('form-sua-cau-hinh-tro-giup',compact('cauHinhTroGiup','pageName'));
+    
     }
 
     /**
@@ -93,13 +118,41 @@ class CauHinhTroGiupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cauHinhTroGiup = CauHinhTroGiup::find($id);
-        $cauHinhTroGiup->loai_tro_giup = $request->input('loai_tro_giup');
-        $cauHinhTroGiup->thu_tu = $request->input('thu_tu');
-        $cauHinhTroGiup->credit=$request->input('credit');
-        $cauHinhTroGiup->save();
-        
-        return redirect()->action('CauHinhTroGiupController@index')->withSuccessMessage('Cập nhật thành công!');
+        $validate = Validator::make(
+                $request->all(),
+                [
+                    'loai_tro_giup' => 'bail|required|min:0|max:5',
+                    'thu_tu' => 'bail|required|min:0|max:100',
+                    'credit' => 'bail|required|min:0|max:500',
+                ],
+
+                [
+                    'required' => ':attribute không được để trống!',
+                    'min' => ':attribute không được nhỏ hơn :min!',
+                    'max' => ':attribute không được lớn hơn :max!',
+                ],
+
+                [
+                    'loai_tro_giup' => 'Loại trợ giúp ',
+                    'thu_tu' => 'Thứ tự ',
+                    'credit' => 'Số Credit ',
+                ]
+
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('cau-hinh-tro-giup/ds-cau-hinh-tro-giup')->with('error',$errors->all());
+        }
+        else
+        {
+            $cauHinhTroGiup = CauHinhTroGiup::find($id);
+            $cauHinhTroGiup->loai_tro_giup = $request->input('loai_tro_giup');
+            $cauHinhTroGiup->thu_tu = $request->input('thu_tu');
+            $cauHinhTroGiup->credit=$request->input('credit');
+            $cauHinhTroGiup->save();
+            
+            return redirect()->action('CauHinhTroGiupController@index')->withSuccessMessage('Cập nhật thành công!');
+        }
     }
 
     /**

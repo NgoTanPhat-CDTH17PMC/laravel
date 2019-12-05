@@ -66,23 +66,39 @@ class CauHoiController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->noi_dung;
+       $validate = Validator::make(
+                $request->all(),
+                [
+                    'noi_dung' => 'bail|required|min:0|max:500|unique:cau-hoi,noi_dung',
+                    'phuong_an_a' => 'bail|required|min:0|max:100',
+                    'phuong_an_b' => 'bail|required|min:0|max:100',
+                    'phuong_an_c' => 'bail|required|min:0|max:100',
+                    'phuong_an_d' => 'bail|required|min:0|max:100',
+                    'dap_an' => 'bail|required|min:0|max:100',
+                ],
 
-        if ($input == '' || $request->linh_vuc_id == '' || $request->phuong_an_a == '' || $request->phuong_an_b == '' || $request->phuong_an_c == '' || $request->phuong_an_d == '' || $request->dap_an == '') 
-        {
-            return redirect()->route('cau-hoi/ds-cau-hoi')->with('error','Thêm mới thất bại. Các trường không được để trống!');
+                [
+                    'required' => ':attribute không được để trống!',
+                    'min' => ':attribute không được nhỏ hơn :min!',
+                    'max' => ':attribute không được lớn hơn :max!',
+                    'unique' => ':attribute đã tồn tại!',
+                ],
+
+                [
+                    'noi_dung' => 'Nội dung ',
+                    'phuong_an_a' => 'Phương án A ',
+                    'phuong_an_b' => 'Phương án B ',
+                    'phuong_an_c' => 'Phương án C ',
+                    'phuong_an_d' => 'Phương án D ',
+                    'dap_an' => 'Đáp án ',
+                ]
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('cau-hoi/ds-cau-hoi')->with('error',$errors->all());
         }
         else 
         {
-            $chkCauHoi = CauHoi::all();
-            foreach ($chkCauHoi as $table)
-            {
-                if ($table->noi_dung == $input)
-                {
-                    return redirect()->route('cau-hoi/ds-cau-hoi')->with('error','Câu hỏi này đã tồn tại!');
-                }
-            }
-
             $cauHoi = new CauHoi;
             $cauHoi->noi_dung = $request->noi_dung;
             $cauHoi->linh_vuc_id = $request->linh_vuc_id;
@@ -122,10 +138,6 @@ class CauHoiController extends Controller
      */
     public function edit($id)
     {
-        $linhVuc=LinhVuc::all();
-        $cauHoi = CauHoi::findOrFail($id);
-        $pageName = 'Cập Nhật Câu Hỏi'; // Khai báo tên trang.
-        return view('form-sua-cau-hoi',compact('cauHoi','pageName','linhVuc'));
     }
 
     /**
@@ -137,13 +149,38 @@ class CauHoiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input = $request->noi_dung;
+        $validate = Validator::make(
+                $request->all(),
+                [
+                    'noi_dung' => 'bail|required|min:0|max:500|unique:cau-hoi,noi_dung',
+                    'phuong_an_a' => 'bail|required|min:0|max:100',
+                    'phuong_an_b' => 'bail|required|min:0|max:100',
+                    'phuong_an_c' => 'bail|required|min:0|max:100',
+                    'phuong_an_d' => 'bail|required|min:0|max:100',
+                    'dap_an' => 'bail|required|min:0|max:100',
+                ],
 
-        if ($input == '' || $request->linh_vuc_id == '' || $request->phuong_an_a == '' || $request->phuong_an_b == '' || $request->phuong_an_c == '' || $request->phuong_an_d == '' || $request->dap_an == '') 
-        {
-            return redirect()->route('cau-hoi/ds-cau-hoi')->with('error','Cập nhật thất bại. Các trường không được để trống!');
+                [
+                    'required' => ':attribute không được để trống!',
+                    'min' => ':attribute không được nhỏ hơn :min!',
+                    'max' => ':attribute không được lớn hơn :max!',
+                    'unique' => ':attribute đã tồn tại!',
+                ],
+
+                [
+                    'noi_dung' => 'Nội dung ',
+                    'phuong_an_a' => 'Phương án A ',
+                    'phuong_an_b' => 'Phương án B ',
+                    'phuong_an_c' => 'Phương án C ',
+                    'phuong_an_d' => 'Phương án D ',
+                    'dap_an' => 'Đáp án ',
+                ]
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('cau-hoi/ds-cau-hoi')->with('error',$errors->all());
         }
-        else 
+        else
         {
             $cauHoi = CauHoi::find($id);
             $cauHoi->noi_dung = $request->noi_dung;

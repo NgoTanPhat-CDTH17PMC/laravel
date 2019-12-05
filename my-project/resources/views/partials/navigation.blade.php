@@ -214,13 +214,23 @@
 								<a href="{{route('nguoi-choi/ds-nguoi-choi')}}"> <i class="la la-briefcase"></i>Người Chơi <div class="arrow-down"></div></a>
 								<ul class="submenu">
 									<li class="has-submenu">
-										<a href=""> <i class="la la-lock"></i>Người Chơi Bị Khoá TK</a>
+										<a href="#"> <i class="la la-lock"></i>Người Chơi Bị Khoá TK</a>
 									</li>
 									<li class="has-submenu">
 										<a href="{{ route('luot-choi/ds-luot-choi')}}"> <i class="la la-file-text-o"></i>Lượt Chơi</a>
 									</li>
 									<li class="has-submenu">
 										<a href="{{ route('lich-su-mua-credit/ds-lich-su-mua-credit')}}"><i class="fe-bookmark mr-1"></i>Lịch sử mua credit</a>
+									</li>
+								</ul>
+							</li>
+
+							<li class="has-submenu">
+								<a href="{{route('quan-tri-vien/ds-quan-tri-vien')}}">
+									<i class="la la-briefcase"></i>Quản Trị Viên <div class="arrow-down"></div></a>
+								<ul class="submenu">
+									<li class="has-submenu">
+										<a href="#"> <i class="la la-lock"></i>Quản Trị Viên Bị Khoá TK</a>
 									</li>
 								</ul>
 							</li>

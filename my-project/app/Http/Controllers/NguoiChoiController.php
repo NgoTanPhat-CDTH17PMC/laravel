@@ -9,7 +9,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class NguoiChoiController extends Controller
 {
-     public static function cleanup()
+    public static function cleanup()
     {       
         $max = DB::table('nguoi_choi')->max('id') + 1; 
         DB::statement("ALTER TABLE nguoi_choi AUTO_INCREMENT =  $max");
