@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\GoiCredit;
+use Validator;
+use Alert;
 
 
 class GoiCreditController extends Controller
@@ -27,7 +29,7 @@ class GoiCreditController extends Controller
         if(session('error')){
              Alert::error('Thất Bại', session('error'));
         }
-        $goiCredit = DB::table('goi_credit')->get();
+         $goiCredit = GoiCredit::all();
         return view('ds-goi-credit', compact('goiCredit'));
     }
 
@@ -48,12 +50,40 @@ class GoiCreditController extends Controller
      */
     public function store(Request $request)
     {
-        $goiCredit = new GoiCredit;
-        $goiCredit->ten_goi = $request->ten_goi;
-        $goiCredit->credit = $request->credit;
-        $goiCredit->so_tien = $request->so_tien;
-        $goiCredit->save();
-        return redirect()->action('GoiCreditController@index')->withSuccessMessage('Thêm mới thành công!');
+        $validate = Validator::make(
+                $request->all(),
+                [
+                    'ten_goi' => 'bail|required|min:2|max:5',
+                    'so_tien' => 'bail|required|numeric|min:2',
+                    'credit' => 'bail|required|numeric|min:2',
+                ],
+
+                [
+                    'required' => ':attribute không được để trống!',
+                    'min' => ':attribute không được nhỏ hơn :min!',
+                    'max' => ':attribute không được lớn hơn :max!',
+                    'numeric' => ':attribute không đúng định dạng!',
+                ],
+
+                [
+                    'ten_goi' => 'Tên gói ',
+                    'so_tien' => 'Số tiền ',
+                    'credit' => 'Số Credit ',
+                ]
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('goi-credit/ds-goi-credit')->with('error',$errors->all());
+        }
+        else
+        {
+            $goiCredit = new GoiCredit;
+            $goiCredit->ten_goi = $request->ten_goi;
+            $goiCredit->credit = $request->credit;
+            $goiCredit->so_tien = $request->so_tien;
+            $goiCredit->save();
+            return redirect()->action('GoiCreditController@index')->withSuccessMessage('Thêm mới thành công!');
+        }
     }
 
     /**
@@ -96,6 +126,24 @@ class GoiCreditController extends Controller
         return redirect()->action('GoiCreditController@index')->withSuccessMessage('Cập nhật thành công!');
     }
 
+    public function deleted()
+    {
+        if(session('success_message')){
+            Alert::success('Hoàn Tất', session('success_message'));
+        }
+
+        $goiCredit = GoiCredit::onlyTrashed()->get();
+        return view('bin.goi-credit-deleted', compact('goiCredit'));
+    }
+
+    public function restore($id)
+    {
+        $trip = GoiCredit::withTrashed()->where('id', $id)->restore();
+
+        return redirect()->action('GoiCreditController@deleted')->withSuccessMessage('Khôi phục thành công!');
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *
@@ -105,8 +153,14 @@ class GoiCreditController extends Controller
     public function destroy($id)
     {
         $goiCredit = GoiCredit::find($id);
-
-        $goiCredit->delete();
-        return redirect()->action('GoiCreditController@index')->withSuccessMessage('Xóa thành công!');
+        if($goiCredit!=null)
+        {
+            $goiCredit->delete();
+            return redirect()->action('GoiCreditController@index')->withSuccessMessage('Xóa thành công!');
+        }
+        else
+        {
+            return redirect()->action('GoiCreditController@index')->with('error','Xoá thất bại!');
+        }
     }
 }

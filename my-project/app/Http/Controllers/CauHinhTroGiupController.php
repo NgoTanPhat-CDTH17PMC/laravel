@@ -30,7 +30,7 @@ class CauHinhTroGiupController extends Controller
         if(session('error')){
              Alert::error('Thất Bại', session('error'));
         }
-        $cauHinhTroGiup = DB::table('cau_hinh_tro_giup')->get();
+        $cauHinhTroGiup = CauHinhTroGiup::all();
         return view('ds-cau-hinh-tro-giup', compact('cauHinhTroGiup'));
     }
 
@@ -155,6 +155,23 @@ class CauHinhTroGiupController extends Controller
         }
     }
 
+    public function deleted()
+    {
+        if(session('success_message')){
+            Alert::success('Hoàn Tất', session('success_message'));
+        }
+
+        $cauHinhTroGiup = CauHinhTroGiup::onlyTrashed()->get();
+        return view('bin.cau-hinh-tro-giup-deleted', compact('cauHinhTroGiup'));
+    }
+
+    public function restore($id)
+    {
+        $trip = CauHinhTroGiup::withTrashed()->where('id', $id)->restore();
+
+        return redirect()->action('CauHinhTroGiupController@deleted')->withSuccessMessage('Khôi phục thành công!');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -165,8 +182,14 @@ class CauHinhTroGiupController extends Controller
     {
         $cauHinhTroGiup = CauHinhTroGiup::find($id);
 
-        $cauHinhTroGiup->delete();
-
-        return redirect()->action('CauHinhTroGiupController@index')->withSuccessMessage('Xoá thành công!');
+        if($cauHinhTroGiup!=null)
+        {
+            $cauHinhTroGiup->delete();
+            return redirect()->action('CauHinhTroGiupController@index')->withSuccessMessage('Xóa thành công!');
+        }
+        else
+        {
+            return redirect()->action('CauHinhTroGiupController@index')->with('error','Xoá thất bại!');
+        }
     }
 }

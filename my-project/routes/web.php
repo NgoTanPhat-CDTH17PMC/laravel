@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function(){
 			Route::post('xu-li-them-moi', 'QuanTriVienController@store')->name('xu-li-them-moi');
 			Route::DELETE('xoa/{id}', 'QuanTriVienController@destroy')->name('xoa');
 
-			Route::get('da-xoa', 'QuanTriVienController@deleted')->name('da-xoa');
+			Route::get('da-khoa', 'QuanTriVienController@deleted')->name('da-khoa');
 			Route::post('khoi-phuc/{id}', 'QuanTriVienController@restore')->name('khoi-phuc');
 		});
 	});
@@ -83,6 +83,8 @@ Route::middleware('auth')->group(function(){
 			Route::PATCH('cap-nhat/{id}', 'CauHinhAppController@update');
 
 			Route::DELETE('xoa/{id}', 'CauHinhAppController@destroy')->name('xoa');
+			Route::get('da-xoa', 'CauHinhAppController@deleted')->name('da-xoa');
+			Route::post('khoi-phuc/{id}', 'CauHinhAppController@restore')->name('khoi-phuc');
 		});
 	});
 
@@ -97,6 +99,8 @@ Route::middleware('auth')->group(function(){
 			Route::PATCH('cap-nhat/{id}', 'CauHinhDiemCauHoiController@update');
 
 			Route::DELETE('xoa/{id}', 'CauHinhDiemCauHoiController@destroy')->name('xoa');
+			Route::get('da-xoa', 'CauHinhDiemCauHoiController@deleted')->name('da-xoa');
+			Route::post('khoi-phuc/{id}', 'CauHinhDiemCauHoiController@restore')->name('khoi-phuc');
 		});
 	});
 
@@ -111,6 +115,8 @@ Route::middleware('auth')->group(function(){
 			Route::PATCH('cap-nhat/{id}', 'CauHinhTroGiupController@update');
 
 			Route::DELETE('xoa/{id}', 'CauHinhTroGiupController@destroy')->name('xoa');
+			Route::get('da-xoa', 'CauHinhTroGiupController@deleted')->name('da-xoa');
+			Route::post('khoi-phuc/{id}', 'CauHinhTroGiupController@restore')->name('khoi-phuc');
 		});
 	});
 
@@ -125,6 +131,8 @@ Route::middleware('auth')->group(function(){
 			Route::PATCH('cap-nhat/{id}', 'GoiCreditController@update');
 
 			Route::DELETE('xoa/{id}', 'GoiCreditController@destroy')->name('xoa');
+			Route::get('da-xoa', 'GoiCreditController@deleted')->name('da-xoa');
+			Route::post('khoi-phuc/{id}', 'GoiCreditController@restore')->name('khoi-phuc');
 		});
 	});
 
@@ -149,6 +157,8 @@ Route::middleware('auth')->group(function(){
 			Route::get('ds-nguoi-choi', 'NguoiChoiController@index')->name('ds-nguoi-choi');
 
 			Route::DELETE('xoa/{id}', 'NguoiChoiController@destroy')->name('xoa');
+			Route::get('da-khoa', 'NguoiChoiController@deleted')->name('da-khoa');
+			Route::post('khoi-phuc/{id}', 'NguoiChoiController@restore')->name('khoi-phuc');
 		});
 	});
 

@@ -217,16 +217,37 @@ class QuanTriVienController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleted()
     {
-        //
+        if(session('success_message')){
+            Alert::success('Hoàn Tất', session('success_message'));
+        }
+
+        $quanTriVien = QuanTriVien::onlyTrashed()->get();
+        return view('bin.quan-tri-vien-blocked', compact('quanTriVien'));
     }
-    public function delete()
-    {
-        //
-    }
+
     public function restore($id)
     {
-        //
+        $trip = QuanTriVien::withTrashed()->where('id', $id)->restore();
+
+        return redirect()->action('QuanTriVienController@deleted')->withSuccessMessage('Mở khóa thành công!');
+    }
+
+    public function destroy($id)
+    {
+        $quanTriVien = QuanTriVien::find($id);
+
+        $quanTriVien->delete();
+       
+        if($quanTriVien!=null)
+        {
+            $quanTriVien->delete();
+             return redirect()->action('QuanTriVienController@index')->withSuccessMessage('Khoá tài khoản thành công!');
+        }
+        else
+        {
+            return redirect()->action('QuanTriVienController@index')->with('error','Khoá tài khoản thất bại!');
+        }
     }
 }

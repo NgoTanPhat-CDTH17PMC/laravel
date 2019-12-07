@@ -86,6 +86,23 @@ class NguoiChoiController extends Controller
         //
     }
 
+    public function deleted()
+    {
+        if(session('success_message')){
+            Alert::success('Hoàn Tất', session('success_message'));
+        }
+
+        $nguoiChoi = NguoiChoi::onlyTrashed()->get();
+        return view('bin.nguoi-choi-blocked', compact('nguoiChoi'));
+    }
+
+    public function restore($id)
+    {
+        $trip = NguoiChoi::withTrashed()->where('id', $id)->restore();
+
+        return redirect()->action('NguoiChoiController@deleted')->withSuccessMessage('Mở khóa thành công!');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

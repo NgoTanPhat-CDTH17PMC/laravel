@@ -32,7 +32,7 @@ class CauHinhAppController extends Controller
              Alert::error('Thất Bại', session('error'));
         }
 
-        $cauHinhApp = DB::table('cau_hinh_app')->get();
+        $cauHinhApp = CauHinhApp::all();
         return view('ds-cau-hinh-app', compact('cauHinhApp'));
     }
 
@@ -153,6 +153,23 @@ class CauHinhAppController extends Controller
         }
     }
 
+    public function deleted()
+    {
+        if(session('success_message')){
+            Alert::success('Hoàn Tất', session('success_message'));
+        }
+
+        $cauHinhApp = CauHinhApp::onlyTrashed()->get();
+        return view('bin.cau-hinh-app-deleted', compact('cauHinhApp'));
+    }
+
+    public function restore($id)
+    {
+        $trip = CauHinhApp::withTrashed()->where('id', $id)->restore();
+
+        return redirect()->action('CauHinhAppController@deleted')->withSuccessMessage('Khôi phục thành công!');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -163,8 +180,14 @@ class CauHinhAppController extends Controller
     {
         $cauHinhApp = CauHinhApp::find($id);
 
-        $cauHinhApp->delete();
-
-        return redirect()->action('CauHinhAppController@index')->withSuccessMessage('Xóa thành công!');
+        if($cauHinhApp!=null)
+        {
+            $cauHinhApp->delete();
+            return redirect()->action('CauHinhAppController@index')->withSuccessMessage('Xóa thành công!');
+        }
+        else
+        {
+            return redirect()->action('CauHinhAppController@index')->with('error','Xoá thất bại!');
+        }
     }
 }

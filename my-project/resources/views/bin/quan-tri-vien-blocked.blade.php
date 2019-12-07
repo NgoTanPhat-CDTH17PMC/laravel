@@ -45,7 +45,7 @@
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="header-title">Danh Sách Lĩnh Vực Đã Xoá</h4>
+				<h4 class="header-title">Danh Sách Quản Trị Viên Đã Khóa</h4>
 				@csrf
 
 				<br>
@@ -53,17 +53,19 @@
 				<table id="linh-vuc-datatable" class="table dt-responsive nowrap">
 					<thead>
 						<tr>
-							<th style="width: 50px">ID</th>
-							<th>Tên lĩnh vực</th>
+							<th >ID</th>
+							<th>Tên đăng nhập</th>
+							<th>Họ tên</th>
 							<th>Thao tác</th>
 						</tr>
 					</thead>
-
 					<tbody>
-						@foreach ($linhVuc as $table)
+						@foreach ($quanTriVien as $table)
 						<tr>
 							<td>{{ $table->id }}</td>
-							<td>{{ $table->ten }}</td>
+							<td>{{ $table->ten_dang_nhap }}</td>
+							<td>{{ $table->ho_ten }}</td>
+							
 							<td>
 								<form method="POST" action="khoi-phuc/{{$table->id}}" style="float:left" >
 									@csrf
@@ -80,7 +82,7 @@
 								                </div>
 								                <div class="modal-body">
 								                    <div class="row">
-								                        <h4 style="padding-left: 75px;">Bạn có muốn khôi phục lĩnh vực {{$table->ten}} ?</h4>
+								                        <h4 style="padding-left: 50px;">Bạn có muốn mở khóa tài khoản {{$table->ten_dang_nhap}} ?</h4>
 								                    </div>
 								                </div>
 								                <div class="modal-footer">

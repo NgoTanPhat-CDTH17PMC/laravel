@@ -65,11 +65,11 @@
 				                    <div class="row">
 				                        <div class="form-group col-md-8">
                     						<label for="ten_goi">Tên Gói:</label>
-					                        <input type="text" class="form-control" name="noi_dung" id="noi_dung" placeholder="Nhập vào tên gói">
-					                         <label for="so_credit">Số Credit:</label>
-					                        <input type="text" class="form-control" name="phuong_an_a" id="phuong_an_a" placeholder="Nhập vào số credit">
+					                        <input type="text" class="form-control" name="ten_goi" id="ten_goi" placeholder="Nhập vào tên gói">
+					                         <label for="credit">Số Credit:</label>
+					                        <input type="text" class="form-control" name="credit" id="credit" placeholder="Nhập vào số credit">
 					                         <label for="so_tien">Số tiền:</label>
-					                        <input type="text" class="form-control" name="phuong_an_b" id="phuong_an_b" placeholder="Nhập vào số tiền">
+					                        <input type="text" class="form-control" name="so_tien" id="so_tien" placeholder="Nhập vào số tiền">
 				                        </div>
 				                    </div>
 				                </div>

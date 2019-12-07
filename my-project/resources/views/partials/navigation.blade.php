@@ -214,7 +214,7 @@
 								<a href="{{route('nguoi-choi/ds-nguoi-choi')}}"> <i class="la la-briefcase"></i>Người Chơi <div class="arrow-down"></div></a>
 								<ul class="submenu">
 									<li class="has-submenu">
-										<a href="#"> <i class="la la-lock"></i>Người Chơi Bị Khoá TK</a>
+										<a href="{{ route('nguoi-choi/da-khoa')}}"> <i class="la la-lock"></i>Người Chơi Bị Khoá TK</a>
 									</li>
 									<li class="has-submenu">
 										<a href="{{ route('luot-choi/ds-luot-choi')}}"> <i class="la la-file-text-o"></i>Lượt Chơi</a>
@@ -230,7 +230,7 @@
 									<i class="la la-briefcase"></i>Quản Trị Viên <div class="arrow-down"></div></a>
 								<ul class="submenu">
 									<li class="has-submenu">
-										<a href="#"> <i class="la la-lock"></i>Quản Trị Viên Bị Khoá TK</a>
+										<a href="{{ route('quan-tri-vien/da-khoa')}}"> <i class="la la-lock"></i>Quản Trị Viên Bị Khoá TK</a>
 									</li>
 								</ul>
 							</li>
@@ -275,10 +275,16 @@
 											<a href="{{ route('cau-hoi/da-xoa')}}">Câu Hỏi</a>
 										</li>
 										<li class="has-submenu">
-											<a href="#">Gói Credit</a>
+											<a href="{{ route('goi-credit/da-xoa')}}">Gói Credit</a>
 										</li>
 										<li class="has-submenu">
-											<a href="#">Quản Trị Viên</a>
+											<a href="{{ route('cau-hinh-app/da-xoa')}}">Cấu Hình App</a>
+										</li>
+										<li class="has-submenu">
+											<a href="{{ route('cau-hinh-tro-giup/da-xoa')}}">Cấu Hình Trợ Giúp</a>
+										</li>
+										<li class="has-submenu">
+											<a href="{{ route('cau-hinh-diem-cau-hoi/da-xoa')}}">Cấu Hình Điểm Câu Hỏi</a>
 										</li>
 									</ul>
 							</li>
