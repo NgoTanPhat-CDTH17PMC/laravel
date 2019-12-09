@@ -13,8 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::post('dang-nhap','API\LoginController@dangNhap');
+
+Route::middleware(['jwt.auth'])->group(function(){
+	Route::get('lay-thong-tin','API\LoginController@layThongTin');
 });
 
 Route::get('linh-vuc', 'API\LinhVucController@layDanhSach')->name('linh-vuc');

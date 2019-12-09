@@ -53,6 +53,18 @@ class QuanTriVienController extends Controller
         return view('dang-nhap');
     }
 
+    public function xuLyDangNhap(Request $request){
+        $credentials=[
+            'ten_dang_nhap' => $request->ten_dang_nhap,
+            'password' => $request->mat_khau
+        ];
+
+        if(!auth('web')->attempt($credentials)){
+            return redirect()->route('dang-nhap')->with('error', 'Sai tài khoản hoặc mật khẩu!');
+        }
+        return redirect()->route('trang-chu')->withSuccessMessage('Đăng nhập thành công!');
+    }
+/*
     public function xuLyDangNhap(Request $request)
     {
         $ten_dang_nhap = $request->ten_dang_nhap;
@@ -64,17 +76,24 @@ class QuanTriVienController extends Controller
         }
             return redirect()->route('dang-nhap')->with('error', 'Sai tài khoản hoặc mật khẩu!');
     }
+*/
 
     public function layThongTin()
     {
         return Auth::user();
     }
 
+    public function dangXuat(){
+        Auth('web')->logout();
+        return view('dang-xuat');
+    }
+/*
     public function dangXuat()
     {
         Auth::logout();
         return view('dang-xuat');
     }
+*/
 
     /**
      * Show the form for creating a new resource.

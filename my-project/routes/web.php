@@ -10,11 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware('guest:web')->group(function(){
+	Route::get('dang-nhap', 'QuanTriVienController@dangNhap')->name('dang-nhap');
+	Route::post('xu-ly-dang-nhap', 'QuanTriVienController@xuLyDangNhap')->name('xu-ly-dang-nhap');
+});
 
-Route::get('dang-nhap', 'QuanTriVienController@dangNhap')->name('dang-nhap')->middleware('guest');
-Route::post('xu-ly-dang-nhap', 'QuanTriVienController@xuLyDangNhap')->name('xu-ly-dang-nhap');
-
-Route::middleware('auth')->group(function(){
+Route::middleware('auth:web')->group(function(){
 	Route::get('dang-xuat', 'QuanTriVienController@dangXuat')->name('dang-xuat');
 	
 	Route::get('/', function (){
