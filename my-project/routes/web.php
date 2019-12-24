@@ -15,9 +15,10 @@ Route::middleware('guest:web')->group(function(){
 	Route::post('xu-ly-dang-nhap', 'QuanTriVienController@xuLyDangNhap')->name('xu-ly-dang-nhap');
 });
 
+
 Route::middleware('auth:web')->group(function(){
 	Route::get('dang-xuat', 'QuanTriVienController@dangXuat')->name('dang-xuat');
-	
+
 	Route::get('/', function (){
 	    return view('layout');
 	})->name('trang-chu');
@@ -28,7 +29,6 @@ Route::middleware('auth:web')->group(function(){
 
 			Route::get('them-moi', 'QuanTriVienController@create')->name('them-moi');
 
-			Route::get('cap-nhat/{id}','QuanTriVienController@edit')->name('cap-nhat');
 			Route::PATCH('cap-nhat/{id}', 'QuanTriVienController@update');
 
 			Route::post('xu-li-them-moi', 'QuanTriVienController@store')->name('xu-li-them-moi');

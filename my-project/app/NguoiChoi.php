@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Carbon\Carbon;
 
 
 class NguoiChoi extends Authenticatable implements JWTSubject
@@ -15,7 +16,8 @@ class NguoiChoi extends Authenticatable implements JWTSubject
 
     protected $table='nguoi_choi';
 
-    protected $hidden=['mat_khau'];
+
+    //protected $hidden=['mat_khau'];
 
     public function getPasswordAttribute(){
     	return $this->mat_khau;

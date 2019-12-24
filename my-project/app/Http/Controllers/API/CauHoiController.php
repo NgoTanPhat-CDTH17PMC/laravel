@@ -12,4 +12,16 @@ class CauHoiController extends Controller
     {
 	    return CauHoi::all();
 	}
+
+	public function layCauHoi(Request $request){
+		$linhVucID =$request->linh_vuc_id;
+		$cauHoi=CauHoi::where('linh_vuc_id',$linhVucID)->inRandomOrder()->get();
+		$result=[
+			'success' =>true,
+			'data' =>$cauHoi
+		];
+
+		return response()->json($result);
+	}
+
 }

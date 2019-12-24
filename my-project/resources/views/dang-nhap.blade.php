@@ -39,7 +39,7 @@
                                 <h5 class="auth-title">ĐĂNG NHẬP</h5>
                                 <form action="{{ route('xu-ly-dang-nhap') }}" method="POST">
                                     @csrf
-                                    <div class="form-group mb-3">
+                                    <div class style="width: " ="form-group mb-3">
                                         <label for="ten_dang_nhap">Tên Đăng Nhập</label>
                                         <input class="form-control" type="text" id="ten_dang_nhap" name="ten_dang_nhap" required="" placeholder="Nhập tên đăng nhập của bạn...">
                                     </div>

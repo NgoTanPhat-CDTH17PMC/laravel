@@ -18,9 +18,12 @@ class CreateTableNguoiChoi extends Migration
             $table->string('ten_dang_nhap');
             $table->string('mat_khau');
             $table->string('email');
-            $table->string('hinh_dai_dien');
-            $table->integer('diem_cao_nhat');
-            $table->integer('credit');
+            $table->string('ho_ten')->default('');
+            $table->string('ngay_sinh')->default('');
+            $table->string('so_dien_thoai')->default('');
+            $table->string('hinh_dai_dien')->default('');
+            $table->integer('diem_cao_nhat')->default(0);
+            $table->integer('credit')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

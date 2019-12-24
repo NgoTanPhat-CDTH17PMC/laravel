@@ -12,4 +12,13 @@ class LinhVucController extends Controller
     {
     	return LinhVuc::all();
     }
+
+    public function layDanhSach(){
+    	$listLinhVuc=LinhVuc::all()->random(4);
+    	$result=[
+    		'success' =>true,
+    		'data' => $listLinhVuc
+    	];
+    	return response()->json($result);
+    }
 }

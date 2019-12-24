@@ -55,6 +55,9 @@
 						<tr>
 							<th style="display: none">ID</th>
 							<th style="display: none; width:20%">Tên đăng nhập</th>
+							<th style="display: none">Họ tên</th>
+							<th style="display: none">Ngày sinh</th>
+							<th style="display: none">Số điện thoại</th>
 							<th style="display: none; width:20%">Email</th>
 							<th style="display: none; width:20%">Hình đại diện</th>
 							<th style="display: none; width:20%">Điểm cao nhất</th>
@@ -69,6 +72,9 @@
 						<tr>
 							<td>{{ $table->id }}</td>
 							<td>{{ $table->ten_dang_nhap }}</td>
+							<td>{{ $table->ho_ten }}</td>
+							<td>{{ $table->ngay_sinh }}</td>
+							<td>{{ $table->so_dien_thoai }}</td>
 							<td>{{ $table->email }}</td>
 							<td>{{ $table->hinh_dai_dien }}</td>
 							<td>{{ $table->diem_cao_nhat }}</td>
