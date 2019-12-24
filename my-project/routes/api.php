@@ -41,16 +41,16 @@ Route::POST('cau-hoi', 'API\CauHoiController@layCauHoi')->name('cau-hoi');
 
 Route::prefix('chi-tiet-luot-choi')->group(function(){
 		Route::name('chi-tiet-luot-choi/')->group(function () {
-      Route::GET('ds-chi-tiet-luot-choi','API\ChiTietLuotChoiController@layDanhSachTheoID');
-      Route::POST('luu-chi-tiet-luot-choi','API\ChiTietLuotChoiController@luuChiTietLuotChoi');
+  		Route::GET('ds-chi-tiet-luot-choi','API\ChiTietLuotChoiController@layDanhSachTheoID');
+  		Route::POST('luu-chi-tiet-luot-choi','API\ChiTietLuotChoiController@luuChiTietLuotChoi');
 	});
 });
 
 Route::prefix('luot-choi')->group(function(){
 		Route::name('luot-choi/')->group(function () {
-      Route::POST('ds-luot-choi','API\LuotChoiController@layDanhSachTheoID');
-      Route::POST('luu-luot-choi','API\LuotChoiController@luuLuotChoi');
-      Route::POST('luu-diem-cao-nhat','API\LuotChoiController@luuDiemCaoNhatCuaNguoiChoi');
+  		Route::POST('ds-luot-choi','API\LuotChoiController@layDanhSachTheoID');
+  		Route::POST('luu-luot-choi','API\LuotChoiController@luuLuotChoi');
+  		Route::POST('luu-diem-cao-nhat','API\LuotChoiController@luuDiemCaoNhatCuaNguoiChoi');
 	});
 });
 

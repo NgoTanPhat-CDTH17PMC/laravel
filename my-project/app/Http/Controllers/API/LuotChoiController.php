@@ -14,7 +14,7 @@ class LuotChoiController extends Controller
 		$nguoiChoiID = $request->nguoi_choi_id;
 		$luotChoi=LuotChoi::where('nguoi_choi_id',$nguoiChoiID)->orderBy('id', 'desc')->get();
 		$result=[
-			'status' =>true,
+			'status' => true,
 			'data' =>$luotChoi
 		];
 
@@ -31,7 +31,7 @@ class LuotChoiController extends Controller
 		$luotChoi->save();
 		return response()->json(
 		[
-			'status' =>true,
+			'status' => true,
 			'data' =>$luotChoi
 		],200);
 	}
@@ -39,7 +39,7 @@ class LuotChoiController extends Controller
 	public function luuDiemCaoNhatCuaNguoiChoi(Request $request)
 	{
 		$nguoiChoiID = $request->nguoi_choi_id;
-		$luotChoi = LuotChoi::where('nguoi_choi_id',$nguoiChoiID)->orderBy('diem', 'desc')->first(); 
+		$luotChoi = LuotChoi::where('nguoi_choi_id', $nguoiChoiID)->orderBy('diem', 'desc')->first(); 
 		$diemCaoNhat = $luotChoi->diem;
 
 		$nguoiChoi=NguoiChoi::find($nguoiChoiID);
