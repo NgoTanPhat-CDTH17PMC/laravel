@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Image;
 use JWTAuth;
 use App\NguoiChoi;
 use Validator;
@@ -163,50 +164,33 @@ class UserController extends Controller
         }
     }
 
+
     public function UploadAnhDaiDien(Request $request) 
     {
-       $validator = Validator::make(
-            $request->all(),
-            [
-                'hinh_dai_dien' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            ],
-        );
-        if ($validator->fails()) 
+        $id = $request->id;
+        $hinh_dai_dien=base64_decode($request->hinh_dai_dien);
+
+        $folderName = 'uploads/images/';
+        $safeName = str_random(10).'.'.'jpeg';
+        if(file_put_contents($folderName.$safeName,base64_decode($hinh_dai_dien)))
         {
-             return response()->json(
-                    [
-                        'status' =>false,
-                        'error' => $validator->errors(),
-                    ],401);
-
-        }
-        else {
-            $id=$request->id;
-            $nguoiChoi = NguoiChoi::find($id);
-            // Ko có lỗi, kiểm tra nếu file đã dc upload
-
-            $fileName = null;
-            if (request()->hasFile('hinh_dai_dien')) {
-
-                $image = request()->file('hinh_dai_dien');
-
-                $fileName = md5($image->getClientOriginalName() . time()) . "." . $image->getClientOriginalExtension();
-
-                $filePath = '/uploads/images/' . $fileName;
-
-                $image->move('./uploads/images', $fileName);    
-            }
-            $nguoiChoi->hinh_dai_dien= $filePath;
+            $success = file_put_contents($folderName.$safeName,$hinh_dai_dien);
+            $finalpath="http://10.0.2.2:8000/uploads/images/".$safeName;
+            $nguoiChoi=NguoiChoi::find($id);
+            $nguoiChoi->hinh_dai_dien=$finalpath;
             $nguoiChoi->save();
-
-            // Thành công, show thành công
             return response()->json(
                 [
                     'status' =>true,
-                    'file_path' => $filePath,
-                ],200
+                    'data' => $success,
+                ]
             );
         }
+        return response()->json(
+            [
+                'status' =>false,
+            ]
+        );
     }
 
     public function themLuotChoi(Request $request){
