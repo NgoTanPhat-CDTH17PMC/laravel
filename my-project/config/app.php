@@ -175,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 		RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
 
     ],
 
@@ -227,6 +229,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 		'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+
 
     ],
 

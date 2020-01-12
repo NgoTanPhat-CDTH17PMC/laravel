@@ -64,6 +64,14 @@ Route::prefix('goi-credit')->group(function(){
 	});
 });
 
+
+Route::prefix('goi-credit')->group(function(){
+	Route::name('goi-credit/')->group(function(){
+		Route::GET('ds-goi-credit','API\GoiCreditController@layDanhSach');
+		Route::POST('mua-credit','API\GoiCreditController@muaCredit');
+	});
+});
+
 Route::prefix('lich-su-mua-credit')->group(function(){
 		Route::name('lich-su-mua-credit/')->group(function () {
       	Route::POST('ds-lich-su-mua-credit','API\LichSuMuaCreditController@layDSLichSuMuaCredit');
