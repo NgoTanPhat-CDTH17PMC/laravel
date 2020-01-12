@@ -56,7 +56,7 @@
 				            <div class="modal-content">
 				                <div class="alert alert-danger" style="display:none"></div>
 				                <div class="modal-header">
-				                    <h5 class="modal-title">Thêm Mới Câu Hỏi</h5>
+				                    <h5 class="modal-title">Thêm Mới Cấu Hình Trợ Giúp</h5>
 				                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				                        <span aria-hidden="true">&times;</span>
 				                    </button>

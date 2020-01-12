@@ -66,8 +66,8 @@
 				                <div class="modal-body">
 				                    <div class="row">
 				                        <div class="form-group col-md-8">
-				                            <label for="thu_tu">Thứ tự: </label>
-                    						<input type="text" class="form-control" name="thu_tu" id="thu_tu" placeholder="Nhập vào thứ tự">
+                    						<label for="thu_tu">Thứ tự: </label>
+                    						<input type="number" min="0" max="999" maxlength="999" class="form-control" name="thu_tu" id="thu_tu" placeholder="Nhập vào thứ tự">
                     						<label for="diem">Điểm:  </label>
                     						<input type="text" class="form-control" name="diem" id="diem" placeholder="Nhập vào số điểm">
 				                        </div>
@@ -117,11 +117,8 @@
 								                <div class="modal-body">
 								                    <div class="row">
 								                        <div class="form-group col-md-8">
-								                        	<label for="diem">Thứ tự</label>
-								                            <select class="form-control" name="thu_tu" id="thu_tu" > 
-								                                <option value="{{$table->thu_tu}}">{{$table->thu_tu}}
-								                                </option>
-									                        </select>
+								                        	<label for="thu_tu">Thứ tự: </label>
+            												<input type="number" min="0" max="4" maxlength="999" class="form-control" name="thu_tu" id="thu_tu" placeholder="Nhập vào thứ tự" value="{{$table->thu_tu}}" disabled="true">
 								                        </div>
 								                    </div>
 								                    <div class="row">

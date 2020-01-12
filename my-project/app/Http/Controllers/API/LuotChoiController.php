@@ -52,4 +52,14 @@ class LuotChoiController extends Controller
 			'data' =>$nguoiChoi
 		],200);
 	}
+
+	public function layLuotChoiID(Request $request){
+		$nguoiChoiID = $request->nguoi_choi_id;
+		$luotChoi = LuotChoi::where('nguoi_choi_id',$nguoiChoiID)->orderBy('id', 'desc')->first(); 
+		return response()->json(
+		[
+			'status' =>true,
+			'data' =>$luotChoi
+		],200);
+	}
 }

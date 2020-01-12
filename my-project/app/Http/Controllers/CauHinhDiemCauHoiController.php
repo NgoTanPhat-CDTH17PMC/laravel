@@ -54,11 +54,12 @@ class CauHinhDiemCauHoiController extends Controller
          $validate = Validator::make(
                 $request->all(),
                 [
-                    'thu_tu' => 'bail|required|min:0|max:100',
+                    'thu_tu' => 'bail|required|unique:cau_hinh_diem_cau_hoi,thu_tu',
                     'diem' => 'bail|required|min:0|max:500',
                 ],
 
                 [
+                    'unique' =>':attribute đã tồn tại!',
                     'required' => ':attribute không được để trống!',
                     'min' => ':attribute không được nhỏ hơn :min!',
                     'max' => ':attribute không được lớn hơn :max!',
@@ -118,7 +119,7 @@ class CauHinhDiemCauHoiController extends Controller
         $validate = Validator::make(
                 $request->all(),
                 [
-                    'thu_tu' => 'bail|required|min:0|max:100',
+                    'thu_tu' => 'bail|required',
                     'diem' => 'bail|required|min:0|max:500',
                 ],
 

@@ -121,13 +121,13 @@
 								                    <div class="row">
 								                        <div class="form-group col-md-8">
 								                            <label for="ten_goi">Tên Gói:</label>
-								                            <input type="text" class="form-control" name="ten_goi" id="ten_goi" value="{{ $table->ten_goi }}"></br>
+								                            <input type="text" class="form-control" name="ten_goi" id="ten_goi" value="{{ $table->ten_goi }}" disabled="true">
 								                        </div>
 								                    </div>
 								                    <div class="row">
 								                        <div class="form-group col-md-8">
-								                            <label for="so_credit">Số Credit</label>
-								                            <input type="text" class="form-control" name="so_credit" id="so_credit" value="{{ $table->credit }}">
+								                            <label for="credit">Số Credit</label>
+								                            <input type="text" class="form-control" name="credit" id="credit" value="{{ $table->credit }}">
 								                        </div>
 								                    </div>
 								                    <div class="row">

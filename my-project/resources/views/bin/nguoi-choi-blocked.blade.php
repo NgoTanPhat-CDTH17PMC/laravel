@@ -89,7 +89,7 @@
 								            <div class="modal-content">
 								                <div class="alert alert-danger" style="display:none"></div>
 								                <div class="modal-header">
-								                    <h5 class="modal-title">Khôi Phục Lĩnh Vực</h5>
+								                    <h5 class="modal-title">Khôi Phục Người Chơi</h5>
 								                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								                        <span aria-hidden="true">&times;</span>
 								                    </button>

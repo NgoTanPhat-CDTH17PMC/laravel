@@ -57,8 +57,6 @@
 				</div>
                     	@yield('main-content')
 				<!-- end page title --> 
-
-				
 			</div> <!-- end container -->
 		</div>
 		<!-- end wrapper -->

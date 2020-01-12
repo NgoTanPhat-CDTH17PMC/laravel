@@ -21,7 +21,7 @@ class ThemGoiCredit extends Seeder
         	[
         		'ten_goi' => 'Dân chơi',
                 'credit' => '1000',
-                'so_tien' => '15000'
+                'so_tien' => '75000'
         	],
             [
                 'ten_goi' => 'Rich kid',

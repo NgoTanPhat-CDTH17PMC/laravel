@@ -20,7 +20,7 @@ Route::middleware('auth:web')->group(function(){
 	Route::get('dang-xuat', 'QuanTriVienController@dangXuat')->name('dang-xuat');
 
 	Route::get('/', function (){
-	    return view('layout');
+	    return view('gioi-thieu');
 	})->name('trang-chu');
 
 	Route::prefix('quan-tri-vien')->group(function(){

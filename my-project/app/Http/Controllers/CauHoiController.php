@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\CauHoi;
 use Illuminate\Support\Facades\DB;
 use App\LinhVuc;
+use Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CauHoiController extends Controller
@@ -51,12 +52,6 @@ class CauHoiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $linhVuc=LinhVuc::all();
-        $pageName = 'Thêm Mới Câu Hỏi'; // Khai báo tên trang.
-        return view('form-them-cau-hoi',compact('pageName','linhVuc'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -69,7 +64,8 @@ class CauHoiController extends Controller
        $validate = Validator::make(
                 $request->all(),
                 [
-                    'noi_dung' => 'bail|required|min:0|max:500|unique:cau-hoi,noi_dung',
+                    'noi_dung' => 'bail|required|min:0|max:500',
+                    'linh_vuc_id' =>'bail|required',
                     'phuong_an_a' => 'bail|required|min:0|max:100',
                     'phuong_an_b' => 'bail|required|min:0|max:100',
                     'phuong_an_c' => 'bail|required|min:0|max:100',
@@ -86,6 +82,7 @@ class CauHoiController extends Controller
 
                 [
                     'noi_dung' => 'Nội dung ',
+                    'linh_vuc_id' => 'Lĩnh vực ',
                     'phuong_an_a' => 'Phương án A ',
                     'phuong_an_b' => 'Phương án B ',
                     'phuong_an_c' => 'Phương án C ',
@@ -152,7 +149,8 @@ class CauHoiController extends Controller
         $validate = Validator::make(
                 $request->all(),
                 [
-                    'noi_dung' => 'bail|required|min:0|max:500|unique:cau-hoi,noi_dung',
+                    'noi_dung' => 'bail|required|min:0|max:500',
+                    'linh_vuc_id' =>'bail|required',
                     'phuong_an_a' => 'bail|required|min:0|max:100',
                     'phuong_an_b' => 'bail|required|min:0|max:100',
                     'phuong_an_c' => 'bail|required|min:0|max:100',
@@ -169,6 +167,7 @@ class CauHoiController extends Controller
 
                 [
                     'noi_dung' => 'Nội dung ',
+                    'linh_vuc_id' => 'Lĩnh vực ',
                     'phuong_an_a' => 'Phương án A ',
                     'phuong_an_b' => 'Phương án B ',
                     'phuong_an_c' => 'Phương án C ',

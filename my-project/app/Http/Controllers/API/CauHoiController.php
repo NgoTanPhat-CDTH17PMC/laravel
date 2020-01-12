@@ -20,7 +20,6 @@ class CauHoiController extends Controller
 			'success' =>true,
 			'data' =>$cauHoi
 		];
-
 		return response()->json($result);
 	}
 

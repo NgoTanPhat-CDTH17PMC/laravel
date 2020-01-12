@@ -53,15 +53,15 @@ class GoiCreditController extends Controller
         $validate = Validator::make(
                 $request->all(),
                 [
-                    'ten_goi' => 'bail|required|min:2|max:5',
+                    'ten_goi' => 'bail|required|min:2|unique:goi_credit,ten_goi',
                     'so_tien' => 'bail|required|numeric|min:2',
                     'credit' => 'bail|required|numeric|min:2',
                 ],
 
                 [
+                    'unique' =>':attribute đã tồn tại!',
                     'required' => ':attribute không được để trống!',
                     'min' => ':attribute không được nhỏ hơn :min!',
-                    'max' => ':attribute không được lớn hơn :max!',
                     'numeric' => ':attribute không đúng định dạng!',
                 ],
 
@@ -116,14 +116,41 @@ class GoiCreditController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $goiCredit = GoiCredit::find($id);
-        $goiCredit->ten_goi = $request->input('ten_goi_credit_moi');
-        $goiCredit->credit = $request->input('so_credit');
-        $goiCredit->so_tien = $request->input('so_tien');
+        $validate = Validator::make(
+                $request->all(),
+                [
+                    'ten_goi' => 'bail|required|min:2',
+                    'so_tien' => 'bail|required|numeric|min:2',
+                    'credit' => 'bail|required|numeric|min:2',
+                ],
 
-        $goiCredit->save();
-        
-        return redirect()->action('GoiCreditController@index')->withSuccessMessage('Cập nhật thành công!');
+                [
+                    'required' => ':attribute không được để trống!',
+                    'min' => ':attribute không được nhỏ hơn :min!',
+                    'numeric' => ':attribute không đúng định dạng!',
+                ],
+
+                [
+                    'ten_goi' => 'Tên gói ',
+                    'so_tien' => 'Số tiền ',
+                    'credit' => 'Số Credit ',
+                ]
+        );
+        if ($validate->fails()) {
+            $errors = $validate->errors();
+            return redirect()->route('goi-credit/ds-goi-credit')->with('error',$errors->all());
+        }
+        else
+        {
+            $goiCredit = GoiCredit::find($id);
+            $goiCredit->ten_goi = $request->input('ten_goi');
+            $goiCredit->credit = $request->input('credit');
+            $goiCredit->so_tien = $request->input('so_tien');
+
+            $goiCredit->save();
+            
+            return redirect()->action('GoiCreditController@index')->withSuccessMessage('Cập nhật thành công!');
+        }
     }
 
     public function deleted()

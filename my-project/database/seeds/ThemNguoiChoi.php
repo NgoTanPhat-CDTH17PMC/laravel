@@ -20,7 +20,6 @@ class ThemNguoiChoi extends Seeder
                 'ho_ten' =>'Nguyễn Văn Diu Sơ 1',
                 'ngay_sinh' =>'05-09-1988',
                 'so_dien_thoai'=>'0983965481',
-        		'hinh_dai_dien'=>'user1img.png',
         		'diem_cao_nhat'=>'100',
         		'credit'=>'200'
         	],
@@ -31,7 +30,6 @@ class ThemNguoiChoi extends Seeder
                 'ho_ten' =>'Nguyễn Văn Diu Sơ 2',
                 'ngay_sinh' =>'15-12-1999',
                 'so_dien_thoai'=>'0986436978',
-        		'hinh_dai_dien'=>'user2img.png',
         		'diem_cao_nhat'=>'10',
         		'credit'=>'5'
         	],
@@ -42,7 +40,6 @@ class ThemNguoiChoi extends Seeder
                 'ho_ten' =>'Nguyễn Văn Diu Sơ 3',
                 'ngay_sinh' =>'06-01-2003',
                 'so_dien_thoai'=>'0987654321',
-                'hinh_dai_dien'=>'user3img.png',
                 'diem_cao_nhat'=>'250',
                 'credit'=>'75'
             ],
@@ -53,7 +50,6 @@ class ThemNguoiChoi extends Seeder
                 'ho_ten' =>'Nguyễn Văn Diu Sơ 4',
                 'ngay_sinh' =>'19-05-1985',
                 'so_dien_thoai'=>'0926578965',
-                'hinh_dai_dien'=>'user4img.png',
                 'diem_cao_nhat'=>'0',
                 'credit'=>'125'
             ],
@@ -64,7 +60,6 @@ class ThemNguoiChoi extends Seeder
                 'ho_ten' =>'Nguyễn Văn Diu Sơ 5',
                 'ngay_sinh' =>'02-02-1995',
                 'so_dien_thoai'=>'0832698654',
-                'hinh_dai_dien'=>'user5img.png',
                 'diem_cao_nhat'=>'50',
                 'credit'=>'350'
             ]

@@ -125,7 +125,14 @@
 								                    <div class="row">
 								                        <div class="form-group col-md-8">
 								                            <label for="thoi_gian_tra_loi">Thời gian trả lời</label>
-								                            <input type="text" class="form-control" name="thoi_gian_tra_loi" id="thoi_gian_tra_loi" value="{{ $table->thoi_gian_tra_loi }}">
+								                            <input type="text" class="form-control" name="thoi_gian_tra_loi" id="thoi_gian_tra_
+
+
+
+
+
+
+								                            .36+loi" value="{{ $table->thoi_gian_tra_loi }}">
 								                        </div>
 								                    </div>
 								                </div>

@@ -21,7 +21,7 @@ class CreateTableNguoiChoi extends Migration
             $table->string('ho_ten')->default('');
             $table->string('ngay_sinh')->default('');
             $table->string('so_dien_thoai')->default('');
-            $table->string('hinh_dai_dien')->default('');
+            $table->string('hinh_dai_dien')->default('http://10.0.2.2:8000/uploads/images/user.png');
             $table->integer('diem_cao_nhat')->default(0);
             $table->integer('credit')->default(0);
             $table->timestamps();

@@ -121,7 +121,7 @@ class CauHinhAppController extends Controller
             $request->all(),
             [
                 'co_hoi_sai' => 'bail|required|min:0|max:4',
-                'thoi_gian_tra_loi' => 'bail|required|min:3|max:50',
+                'thoi_gian_tra_loi' => 'bail|required|min:0|max:50',
             ],
 
             [
